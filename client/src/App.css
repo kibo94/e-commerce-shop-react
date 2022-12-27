@@ -1,0 +1,323 @@
+.App {
+  text-align: center;
+  background: white;
+  height: calc(100vh - 25px);
+}
+.App.dark {
+  background: #333;
+  transition: all 0.3s ease;
+}
+.App.light {
+  background: white;
+  transition: all 0.3s ease;
+}
+.App header {
+  transition: ease-in-out 0.3s;
+  cursor: pointer;
+
+  height: 80px;
+  position: relative;
+  width: 100%;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+nav a {
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+  font-size: 25px;
+  margin: 10px;
+}
+nav  svg, nav img{
+  vertical-align: middle;
+}
+
+nav a:hover {
+  color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.status {
+  width: 20px;
+  height: 20px;
+  background: rgb(12, 189, 12);
+  border-radius: 50%;
+  margin-right: 30px;
+  text-align: right;
+  /* position: absolute;
+  right: 130px;
+  top: 50%;
+  transform: translateY(-50%); */
+}
+.status.offline {
+  background: transparent;
+  border: 2px solid rgb(124, 122, 122);
+}
+.App header p {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  font-size: 30px;
+}
+
+.StopWatch {
+  color: rgb(37, 31, 31);
+}
+
+/* Fruits */
+
+.ItemList {
+  list-style: none;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 10px;
+  margin: 50px 0;
+}
+.ItemList li {
+  background-color: wheat;
+  border: 1px solid wheat;
+  color: white;
+  width: 33.33%;
+  padding: 10px;
+  position: relative;
+  line-height: 30px;
+  height: 30px;
+  color:black;
+}
+
+.ItemList.light li{
+  background-color: black;
+  color:wheat;
+}
+.ItemList li .close svg{
+  vertical-align: middle;
+}
+.ItemList li .close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  font-size: 30px;
+  color: red;
+  cursor: pointer;
+  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ItemList li:hover {
+  /* background-color: red; */
+  /* cursor: pointer; */
+}
+.ItemList li .close:hover {
+}
+
+.FilterFruits {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px;
+  gap: 20px;
+}
+/* add fruit */
+.addFruit {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 50px 0;
+}
+.mode {
+  display: flex;
+  align-items: center;
+ 
+}
+.toggleMode {
+  width: 50px;
+  height: auto;
+  border-radius: 20px;
+  height: 30px;
+  border: 2px solid wheat;
+  position: relative;
+  margin-left: 10px;
+}
+
+.toggleMode::before {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  background: white;
+  border-radius: 20px;
+  content: "";
+  height: 70%;
+  transition: all ease-in 0.3s;
+}
+
+.toggleMode.dark::before {
+  position: absolute;
+  left: 5px;
+  background: #333;
+  top: 50%;
+  transform: translate(15px, -50%);
+  transition: all ease-in 0.3s;
+}
+
+/* add itmem */
+.dropdown {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+
+  list-style-type: none;
+  margin: 5px 0;
+  padding: 0;
+
+  border: 1px solid grey;
+  width: 150px;
+}
+
+.menu > li {
+  margin: 0;
+
+  background-color: white;
+}
+
+.menu > li:hover {
+  background-color: lightgray;
+}
+
+.menu > li > button {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+
+.logout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.logout h3{
+  margin: 0;
+  padding: 0;
+}
+
+
+.editModal {
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 300px;
+  height: 300px;
+  z-index: 3;
+  background-color: white;
+}
+
+
+/* Inputs */
+.form form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.form input,textarea{
+  padding: 19px 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+.form input[type="submit"]{
+  background: rgb(72, 72, 244);
+  cursor: pointer;
+  color:white;
+  font-weight: bold;
+  text-transform: uppercase;
+
+}
+.form input[type="submit"]:hover{
+  background: rgb(63, 63, 229);
+}
+
+li{
+  list-style: none;
+}
+li {
+text-align: left;
+
+
+ 
+}
+
+.list{
+  display: flex;
+  background: white;
+flex-direction: column;
+  gap:30px;
+  margin: 0;
+  padding: 50px 50px;
+  
+}
+
+.list div {
+  background: red;
+}
+ul.list > li > span {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: red;
+}
+
+
+
+ul.list .link1 {
+  background: wheat;
+  width: 13.33%;
+
+
+}
+
+ul.list .link2 ,.link3 , .link4 , .link5 {
+
+  padding: 10px 10px;
+  background: black;
+  border: 1px solid red;
+  color: wheat;
+  margin: 10px 0;
+  margin-left: 5px;
+}
+
+ul.list .link3{
+  background: blue;
+  color: white;
+}
+
+ul.list .link4{
+  background: purple;
+  color: white;
+}
+ul.list .link5{
+  background: orange;
+  color: white;
+}

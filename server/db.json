@@ -1,0 +1,125 @@
+{
+  "logedUsers": [],
+  "users": [
+    {
+      "name": "Bojan Bogdanovic",
+      "email": "bojanb106@gmail.com",
+      "password": "1234",
+      "userName": "bojanb106@gmail.com",
+      "id": 3
+    },
+    {
+      "name": "Marko Markovic",
+      "email": "mare@gmail.com",
+      "password": "123",
+      "userName": "mare@gmail.com",
+      "id": 4
+    },
+    {
+      "name": "Bojan",
+      "email": "jankec123@gamil.com",
+      "password": "1234",
+      "userName": "jankec123@gamil.com",
+      "id": 5
+    }
+  ],
+  "laptops": [
+    {
+      "id": 0.9613494633303827,
+      "name": "Lenovo 300",
+      "author": "typicode223",
+      "type": "laptops",
+      "quantity": 0
+    },
+    {
+      "id": 0.8010785937762817,
+      "name": "lenovo 2000",
+      "author": "typicode223",
+      "type": "laptops",
+      "quantity": 3
+    },
+    {
+      "id": 0.2710531612825646,
+      "name": "mac book pro i6",
+      "author": "typicode223",
+      "type": "laptops",
+      "quantity": 3
+    },
+    {
+      "id": 0.5753682641423663,
+      "name": "Lenovo 123",
+      "author": "typicode223",
+      "type": "laptops",
+      "quantity": 3
+    }
+  ],
+  "profiles": [],
+  "logedInProfiles": [],
+  "fruits": [
+    {
+      "id": 1,
+      "name": "ananas",
+      "author": "typicode223",
+      "type": "fruits",
+      "quantity": 3
+    },
+    {
+      "id": 2,
+      "name": "jabuka zlatni delises",
+      "author": "typicode223",
+      "type": "fruits",
+      "quantity": 3
+    },
+    {
+      "id": 3,
+      "name": "pomorandza",
+      "author": "typicode223",
+      "type": "fruits",
+      "quantity": 3
+    },
+    {
+      "id": 0.6631851845583496,
+      "name": "pomorandza",
+      "author": "typicode223",
+      "type": "fruits",
+      "quantity": "5"
+    },
+    {
+      "id": 0.32046634623619985,
+      "name": "kruska",
+      "author": "typicode223",
+      "type": "fruits",
+      "quantity": "5"
+    }
+  ],
+  "vegetables": [
+    {
+      "id": 1,
+      "name": "grasak",
+      "author": "typicode223",
+      "type": "vegetables",
+      "quantity": 3
+    },
+    {
+      "id": 0.7193151800102087,
+      "name": "krompir",
+      "author": "typicode223",
+      "type": "vegetables",
+      "quantity": 3
+    },
+    {
+      "id": 0.06581150853731477,
+      "name": "boranija",
+      "author": "typicode223",
+      "type": "vegetables",
+      "quantity": 3
+    },
+    {
+      "id": 0.28139527398395026,
+      "name": "lubenicca",
+      "author": "typicode223",
+      "type": "vegetables",
+      "quantity": 3
+    }
+  ]
+}
