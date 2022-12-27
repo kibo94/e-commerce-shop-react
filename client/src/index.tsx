@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeContextProvider } from './contexts/ThemeContextProvider';
 import { PopupContextProvider } from './contexts/PopupContext';
 import axios from 'axios';
-axios.defaults.baseURL = 'https://e-commerce-api-ef3m.onrender.com';
+axios.defaults.baseURL = 'https://e-commerce-api-8p0f.onrender.com';
 ReactDOM.render(
 
     <BrowserRouter>
