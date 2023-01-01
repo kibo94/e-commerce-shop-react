@@ -95,7 +95,7 @@ let res = filterByLabel(data, serachTerm);
         Home
         <CloseIcon />
       </Title>
-      <RecursiveMenu />
+      {/* <RecursiveMenu /> */}
     </div>
   );
 }

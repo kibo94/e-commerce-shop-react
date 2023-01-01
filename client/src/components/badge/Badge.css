@@ -1,0 +1,12 @@
+.badge{
+    position: absolute;
+    right: -57px;
+    top: 31px;
+    background: green;
+    transform: rotate(34deg);
+    width: 230px;
+}
+.badge.red{
+    background: red;
+    color: white;
+}

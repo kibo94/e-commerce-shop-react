@@ -6,6 +6,12 @@
 .App.dark {
   background: #333;
   transition: all 0.3s ease;
+  
+}
+@media only screen and (max-width: 1024px) {
+  .App {
+    height: auto;
+  }
 }
 .App.light {
   background: white;
@@ -69,55 +75,105 @@ nav a:hover {
 }
 
 /* Fruits */
+.ItemsListContainer{
+  margin: 0 50px;
+}
+.dark .ItemList .itemCard  {
+  box-shadow: rgba(233, 233, 236, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.itemCard {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  background-color: white;
+  padding: 10px;
+  border-radius: 14px;
+  position: relative;
+  color:black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  
+}
 
 .ItemList {
   list-style: none;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 10px;
-  margin: 50px 0;
-}
-.ItemList li {
-  background-color: wheat;
-  border: 1px solid wheat;
-  color: white;
-  width: 33.33%;
-  padding: 10px;
-  position: relative;
-  line-height: 30px;
-  height: 30px;
-  color:black;
+  display: grid;
+  text-align: center; 
+  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  border-radius: 10px;
+  gap: 50px;
+  /* grid-auto-rows: 200px; */
+
+  padding: 0;
+
 }
 
+
+
+
+
 .ItemList.light li{
-  background-color: black;
+  /* background-color: black; */
   color:wheat;
 }
 .ItemList li .close svg{
   vertical-align: middle;
 }
-.ItemList li .close {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  right: 30px;
-  transform: translateY(-50%);
+
+.ItemList .addToCart,.noMore{
+  margin: 10px 0;
+  /* position: absolute;
+  bottom: 30px; 
+  right: 30px; */
+
+  
+}
+.ItemList .name {
+  margin: 30px;
+  font-weight: bold;
+  font-size: 25px;
+}
+.ItemList img {
+  object-fit: cover;
+  height: 250px;
+  border-radius: 6px;
+  width: 70%;
+}
+.noMore{
+  margin: 0;
+  color: black;
+  padding: 10px;
+  border-radius: 6px;
+  background: orange;
+  cursor: pointer;
+}
+.addToCart{
+  background: rgb(16, 16, 206);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ItemList .itemCard .close {
+
+
+  margin: 10px;
   font-size: 30px;
   color: red;
   cursor: pointer;
+  gap: 20px;
   cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.ItemList li:hover {
+.ItemList .itemCard:hover {
   /* background-color: red; */
   /* cursor: pointer; */
 }
-.ItemList li .close:hover {
+.ItemList .itemCard .close:hover {
 }
 
 .FilterFruits {

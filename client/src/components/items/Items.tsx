@@ -7,7 +7,8 @@ import { Item } from "./item/Item";
 import axios from "axios";
 import { ItemModel } from "../../models/Item";
 import { deleteItemfromList, updateListOfItems } from "../../utils/utils";
-import {useInfiniteQuery, useQuery} from "react-query"
+import "./Items.css"
+
 interface ItemsModel {
   type: string;
   isAdmin: boolean;
@@ -17,14 +18,7 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
   const [items, setItems] = useFetchItems(type);
   const { value } = useTheme();
   const [isEditModaOpen, setIsEditModaOpen] = useState(false);
-  const {refetch,data} = useQuery("items", useFetchItems2(type),{
-    staleTime:6000
-  });
-  useEffect(() => {
-     refetch();
-     console.log(data)
 
-  },[type])
   const [singleItem, setSingleItem] = useState<ItemModel>({
     id: 0,
     type: "",
@@ -106,7 +100,6 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
 
   return (
     <>
-      <div>dasd</div>
       {isEditModaOpen ? (
         <EditItemModal
           name={name}
@@ -115,12 +108,13 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
           closeModal={closeModalHandler}
         />
       ) : null}
-      {flitredItems && flitredItems.length > 0 ? (
-        <FilterItems filterFruit={filterFruitHandler} type={type} />
+    
+      <h1 className="itemHeading">{type.toUpperCase()}</h1>
+      {items && items.length > 0 ? (
+        <FilterItems  filterFruit={filterFruitHandler} type={type} />
       ) : null}
-      <h1>{type.toUpperCase()}</h1>
       {flitredItems && flitredItems.length > 0 ? (
-        <>
+        <div className="ItemsListContainer">
           <ul className={itemsClass}>
             {flitredItems.map((item: ItemModel) => (
               <Item
@@ -133,10 +127,12 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
               />
             ))}
           </ul>
-        </>
+        </div>
       ) : (
         <h1>Loading {type} data...</h1>
       )}
+
+
     </>
   );
 };

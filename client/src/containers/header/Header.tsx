@@ -40,15 +40,6 @@ export const Header = ({
               <Link to="/home">Home</Link>
               <Link to="/fruits">
                 Fruits
-                <img
-                  data-https
-                  alt="headerImage"
-                  src={
-                    "http://images.unsplash.com/photo-1579613832125-5d34a13ffe2a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
-                  }
-                  width={30}
-                  height={30}
-                />
               </Link>
               <Link to="/vegetables">Vegetables</Link>
               <Link to="/laptops">
@@ -72,10 +63,11 @@ export const Header = ({
             <button onClick={logoutUser}>
               <Link to="/register">Logout</Link>
             </button>
-            <ScreenMode />
+        
             <UserStatus userStatus={online} />
           </div>
         ) : null}
+            <ScreenMode />
       </nav>
       {/* <h1>ITEMS{data?.data.length}</h1> */}
     </header>
