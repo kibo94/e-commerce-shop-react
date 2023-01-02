@@ -49,7 +49,7 @@ nav {
   }
   .App  header.active  {
     height: 100vh;
-    z-index: 99;
+
 
   }
 
@@ -58,6 +58,7 @@ nav {
   }
   .App header{
     position: fixed;
+    z-index: 99;
   }
  
   nav {
