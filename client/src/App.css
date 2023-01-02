@@ -50,11 +50,14 @@ nav {
   .App  header.active  {
     height: 100vh;
     z-index: 99;
-    position: fixed;
+
   }
 
   .App header.active  nav  {
     display: flex;
+  }
+  .App header{
+    position: fixed;
   }
  
   nav {
