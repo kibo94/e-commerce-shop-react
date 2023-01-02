@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ItemModel } from "../../../models/Item";
 import ItemCard from "../../cards/ItemCard";
 import Badge from "../../badge/Badge";
+import PriceBadge from "../../badge/PriceBadge";
 interface SingleItem  {
   item:ItemModel,
   deleteVegetable: (id:number) => void;
@@ -67,6 +68,7 @@ else {
               <button className="addToCart" onClick={() => addToCart(item)}>Add to Cart</button>
             )
           ) : null}
+          <PriceBadge price={item.price}/>
     </ItemCard>
   );
 };

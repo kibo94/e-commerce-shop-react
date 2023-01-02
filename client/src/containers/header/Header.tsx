@@ -1,4 +1,4 @@
-import React , {useCallback,useEffect} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ScreenMode from "../../components/screenMode/ScreenMode";
 import LaptopIcon from "@mui/icons-material/Laptop";
@@ -7,7 +7,7 @@ import UserStatus from "../../components/userStatus/UserStatus";
 import { HeaderProps } from "../../models/HeaderProps";
 import { useQuery } from "react-query";
 import axios from "axios";
-
+import MenuIcon from "@mui/icons-material/Menu";
 export const Header = ({
   authUser,
   admin,
@@ -18,62 +18,73 @@ export const Header = ({
   if (admin) {
     headerColor = "blue";
   }
-//   const {data , isLoading} = useQuery("laptops", useFetchItems2(),{
-//     staleTime:6000
-//   });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  //   const {data , isLoading} = useQuery("laptops", useFetchItems2(),{
+  //     staleTime:6000
+  //   });
 
-// if(isLoading) {}
+  // if(isLoading) {}
+  const toggleBurgerMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  let headerClass = "";
+  if (isMenuOpen) {
+    headerClass = "active"
+  }
   return (
-    <header style={{ backgroundColor: headerColor }}>
-
+    <header className={headerClass} style={{ backgroundColor: headerColor }}>
       {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
+      <div className="burger" onClick={toggleBurgerMenu}>
+        <MenuIcon />
+      </div>
       <nav>
         <div>
-    
           {admin ? (
-            <>
-              <Link to="/addItem">AddItem</Link>
-              <Link to="/items">Items</Link>
-            </>
+            <div className="leftLinks">
+              <Link onClick={() =>     setIsMenuOpen(false)} to="/addItem">AddItem</Link>
+              <Link onClick={() =>     setIsMenuOpen(false)} to="/items">Items</Link>
+            </div>
           ) : (
-            <>
-              <Link to="/home">Home</Link>
-              <Link to="/fruits">
-                Fruits
-              </Link>
-              <Link to="/vegetables">Vegetables</Link>
-              <Link to="/laptops">
+            <div className="leftLinks">
+              <Link  onClick={() =>     setIsMenuOpen(false)}  to="/home">Home</Link>
+              <Link  onClick={() =>     setIsMenuOpen(false)} to="/fruits">Fruits</Link>
+              <Link  onClick={() =>     setIsMenuOpen(false)} to="/vegetables">Vegetables</Link>
+              <Link  onClick={() =>     setIsMenuOpen(false)} to="/laptops">
                 Laptops <LaptopIcon />
               </Link>
-            </>
-          )}
               <Link to="/contact">Contact</Link>
+            </div>
+          )}
+     
         </div>
-        {!authUser.userName ? (
-          <div className="auth">
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
-          </div>
-        ) : null}
+
+        <div className="auth">
+          {!authUser.userName ? (
+            <>
+              <Link  onClick={() =>     setIsMenuOpen(false)} to="/login">Login</Link>
+              <Link  onClick={() =>     setIsMenuOpen(false)} to="/register">Register</Link>
+            </>
+          ) : null}
+          <ScreenMode />
+        </div>
+
         {authUser.userName ? (
           <div className="logout">
             <h3>
               <PersonIcon /> {authUser.userName}
             </h3>
             <button onClick={logoutUser}>
-              <Link to="/register">Logout</Link>
+              <Link  onClick={() =>     setIsMenuOpen(false)} to="/register">Logout</Link>
             </button>
-        
+
             <UserStatus userStatus={online} />
           </div>
         ) : null}
-            <ScreenMode />
       </nav>
       {/* <h1>ITEMS{data?.data.length}</h1> */}
     </header>
   );
 };
-
 
 const useFetchItems2 = () => {
   // const [items, setItems] = useState<ItemModel[]>([]);
@@ -85,6 +96,6 @@ const useFetchItems2 = () => {
   useEffect(() => {
     // setItems([]);
     fetchItems();
-  }, [ fetchItems]);
+  }, [fetchItems]);
   return fetchItems;
 };

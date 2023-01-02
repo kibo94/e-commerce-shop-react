@@ -8,6 +8,7 @@ import { ThemeContextProvider } from './contexts/ThemeContextProvider';
 import { PopupContextProvider } from './contexts/PopupContext';
 import axios from 'axios';
 axios.defaults.baseURL = 'https://e-commerce-api-8p0f.onrender.com';
+// axios.defaults.baseURL = "http://localhost:4000"
 ReactDOM.render(
 
     <BrowserRouter>

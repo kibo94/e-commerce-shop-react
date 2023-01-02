@@ -25,6 +25,7 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
     author: "",
     name: "",
     quantity: 0,
+    price:0
   });
   const [name, setName] = useState("");
   const filterFruitHandler = (value: string) => {
