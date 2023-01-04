@@ -97,7 +97,6 @@ function App() {
     await axios.delete(`/logedUsers/${user.id}`);
     setAuthUser(false);
     setUser(false);
- alert(1)
     navigate("/login");
 
   };
