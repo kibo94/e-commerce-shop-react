@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../models/User";
-import "./Login.css";
+import "./Login.scss";
 
 interface LoginModel {
   login: (username: string, password: string, id: any) => void;
@@ -19,9 +19,7 @@ export const Login = ({ login, user }: LoginModel) => {
       navigate("/home");
     }
   }, [navigate, user]);
-
-  const onLoginSubmit = async (e: any) => {
-    e.preventDefault();
+  const loginUser = async () => {
     const userName = usernameRef.current?.value;
     const password = passwordeRef.current?.value;
     if (userName?.length == 0) {
@@ -47,6 +45,11 @@ export const Login = ({ login, user }: LoginModel) => {
       setAuthError("Username or password is incorrect");
     }
   };
+  const onLoginSubmit = async (e: any) => {
+    e.preventDefault();
+    await loginUser();
+  };
+
   return (
     <div className="login form">
       <form onSubmit={onLoginSubmit}>

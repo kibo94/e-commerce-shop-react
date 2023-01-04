@@ -7,7 +7,7 @@ import { Item } from "./item/Item";
 import axios from "axios";
 import { ItemModel } from "../../models/Item";
 import { deleteItemfromList, updateListOfItems } from "../../utils/utils";
-import "./Items.css"
+import "./Items.scss"
 
 interface ItemsModel {
   type: string;
@@ -27,7 +27,10 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
     quantity: 0,
     price:0
   });
-  const [name, setName] = useState("");
+  const [updatedItem, setUpdatedItem] = useState({
+    name: "",
+    quantity: 0,
+  });
   const filterFruitHandler = (value: string) => {
     setQuery(value);
   };
@@ -41,27 +44,28 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
   const editItemHandler = (item: ItemModel) => {
     setIsEditModaOpen(true);
     setSingleItem(item);
-    setName(item.name);
+    setUpdatedItem({name:item.name,quantity:item.quantity});
   };
   const closeModalHandler = () => {
     setIsEditModaOpen(false);
   };
   const onChangeItemNameHandler = (e: any) => {
-    setName(e.target.value);
+    setUpdatedItem({...updatedItem,[e.target.name]:e.target.value})
+    // setName(e.target.value);
   };
   const onUpdateItemHandler = async () => {
     try {
       if (singleItem) {
+        console.log(updatedItem)
         await axios.put(`/${singleItem?.type}/${singleItem.id}`, {
           ...singleItem,
-          name,
+          ...updatedItem
         });
         // }
         const updatedItems: ItemModel[] = updateListOfItems(items, {
           ...singleItem,
-          name,
+          ...updatedItem
         });
-        console.log(updatedItems);
         toast.warning("Succefully updated item");
         setItems(updatedItems);
       }
@@ -103,7 +107,7 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
     <>
       {isEditModaOpen ? (
         <EditItemModal
-          name={name}
+          item={updatedItem}
           onChangeItemName={onChangeItemNameHandler}
           updateItem={onUpdateItemHandler}
           closeModal={closeModalHandler}
@@ -150,19 +154,19 @@ const useFetchItems = (type: string) => {
   }, [type, fetchItems]);
   return [items, setItems] as const;
 };
-const useFetchItems2 =   (type: string) => {
-  // const [items, setItems] = useState<ItemModel[]>([]);
-  const fetchItems = useCallback( async () => {
-    const data = await axios.get(`/${type}`);
+// const useFetchItems2 =   (type: string) => {
+//   // const [items, setItems] = useState<ItemModel[]>([]);
+//   const fetchItems = useCallback( async () => {
+//     const data = await axios.get(`/${type}`);
 
-    return data;
-    // setItems(data.data);
-  }, [type]);
-  // useEffect(() => {
-  //   // setItems([]);
-  //   fetchItems();
+//     return data;
+//     // setItems(data.data);
+//   }, [type]);
+//   // useEffect(() => {
+//   //   // setItems([]);
+//   //   fetchItems();
   
-  // }, [type, fetchItems]);
+//   // }, [type, fetchItems]);
 
-  return fetchItems;
-};
+//   return fetchItems;
+// };

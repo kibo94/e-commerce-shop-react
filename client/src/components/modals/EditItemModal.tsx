@@ -1,7 +1,7 @@
 import React , {useState} from 'react'
 import ClearIcon from "@mui/icons-material/Clear";
 import { EditModalProps } from '../../models/EditModalProps';
-const EditItemModal = ({ name, closeModal, onChangeItemName ,updateItem }:EditModalProps) => {
+const EditItemModal = ({ item, closeModal, onChangeItemName ,updateItem }:EditModalProps) => {
   // const [plusMinus,setPlusMinus] = useState(quantity)
   const onChangePlusMinus = (e:any) => {
     //  setPlusMinus(e.target.value)
@@ -9,7 +9,8 @@ const EditItemModal = ({ name, closeModal, onChangeItemName ,updateItem }:EditMo
     return (
       <div className="editModal">
         <ClearIcon onClick={closeModal} />
-        <input value={name} onChange={onChangeItemName} />
+        <input value={item.name} onChange={onChangeItemName} name="name"/>
+        <input value={item.quantity} onChange={onChangeItemName}  name="quantity"/>
         <button onClick={updateItem}>Update Item</button>
         {/* <input onChange={onChangePlusMinus} type="number" value={plusMinus}/> */}
       </div>

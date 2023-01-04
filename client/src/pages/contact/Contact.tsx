@@ -1,5 +1,5 @@
-import React, { TextareaHTMLAttributes, useRef } from "react";
-import "./Contact.css";
+import React, { useRef } from "react";
+import "./Contact.scss";
 
 import emailjs from "@emailjs/browser";
 export function Contact() {

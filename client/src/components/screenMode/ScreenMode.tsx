@@ -1,6 +1,7 @@
 import React from "react";
 import { useTheme } from "../../contexts/ThemeContextProvider";
 import { getMode, setModeValue } from "../../utils/utils";
+import "./ScreenMode.scss"
 
 function ScreenMode() {
   const { value, onChange } = useTheme();

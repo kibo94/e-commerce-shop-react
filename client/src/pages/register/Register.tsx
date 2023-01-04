@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect , useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../models/User';
-import "./Register.css"
+import "./Register.scss"
 interface RegisterModel {
   user:User
 }

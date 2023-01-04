@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Badge.css"
+import "./Badge.scss"
 interface PriceBadgeProps {
     price:number
 }

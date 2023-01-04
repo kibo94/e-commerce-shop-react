@@ -13,30 +13,32 @@
     animation-duration: 300ms;
     animation-fill-mode: forwards;
     border-radius: 10px;
+    &.default {
+        background: white;
+    }
+    &.success {
+        background: green;
+    }
+    &.warning {
+        background: yellow;
+     }
+     &.error {
+        background: red;
+    }
+
+    &.overlay {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    &.span {
+        position: absolute;
+        right: 20px;
+        top:20px; 
+     }
  
 }
-.Popup.default {
-    background: white;
-}
-.Popup.success {
-    background: green;
-}
-.Popup.warning {
-   background: yellow;
-}
-.Popup.error {
-    background: red;
-}
-.Popup .overlay {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-.Popup .span {
-   position: absolute;
-   right: 20px;
-   top:20px; 
-}
+
 
 @keyframes slideRight {
     from {transform: translateX(0)}

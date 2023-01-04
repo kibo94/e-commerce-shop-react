@@ -1,0 +1,173 @@
+.App {
+  text-align: center;
+  background: white;
+  height: calc(100vh - 25px);
+}
+.App.dark {
+  background: #333;
+  transition: all 0.3s ease;
+  
+  
+}
+@media only screen and (max-width: 1024px) {
+  .App {
+    height: auto;
+  }
+}
+.App.light {
+  background: white;
+  transition: all 0.3s ease;
+}
+
+
+.StopWatch {
+  color: rgb(37, 31, 31);
+}
+
+/* Fruits */
+.ItemsListContainer{
+  margin: 0 50px;
+  @media(max-width:768px) {
+    margin: 0 20px;
+
+}
+}
+.dark .ItemList .itemCard  {
+  box-shadow: rgba(233, 233, 236, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.itemCard {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  background-color: white;
+  padding: 10px;
+  border-radius: 14px;
+  position: relative;
+  color:black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  
+}
+
+
+
+.FilterFruits {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px;
+  gap: 20px;
+}
+/* add fruit */
+.addFruit {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 50px 0;
+}
+
+
+
+
+
+
+.editModal {
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 300px;
+  height: 300px;
+  z-index: 3;
+  background-color: white;
+}
+
+
+/* Inputs */
+.form form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.form input,textarea{
+  padding: 19px 20px;
+  border-radius: 20px;
+  border: none;
+}
+
+.form input[type="submit"]{
+  background: rgb(72, 72, 244);
+  cursor: pointer;
+  color:white;
+  font-weight: bold;
+  text-transform: uppercase;
+
+}
+.form input[type="submit"]:hover{
+  background: rgb(63, 63, 229);
+}
+
+li{
+  list-style: none;
+}
+li {
+text-align: left;
+
+
+ 
+}
+
+// Recurive menu css
+
+.list{
+  display: flex;
+  background: white;
+flex-direction: column;
+  gap:30px;
+  margin: 0;
+  padding: 50px 50px;
+  
+}
+
+.list div {
+  background: red;
+}
+ul.list > li > span {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: red;
+}
+
+
+
+ul.list .link1 {
+  background: wheat;
+  width: 13.33%;
+
+
+}
+
+ul.list .link2 ,.link3 , .link4 , .link5 {
+
+  padding: 10px 10px;
+  background: black;
+  border: 1px solid red;
+  color: wheat;
+  margin: 10px 0;
+  margin-left: 5px;
+}
+
+ul.list .link3{
+  background: blue;
+  color: white;
+}
+
+ul.list .link4{
+  background: purple;
+  color: white;
+}
+ul.list .link5{
+  background: orange;
+  color: white;
+}

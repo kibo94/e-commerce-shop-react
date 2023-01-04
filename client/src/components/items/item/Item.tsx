@@ -49,6 +49,7 @@ else {
   badgeInfo.type = "green";
   badgeInfo.text = `On stack`
 }
+console.log(item.quantity)
   return (
     <ItemCard>
     <div className="name">{item.name}</div>
@@ -62,7 +63,7 @@ else {
         
         </div>
         {!isAdmin ? (
-            item.quantity === 0 ? (
+            +item.quantity === 0 ? (
               <p className="noMore" >Check avelability </p>
             ) : (
               <button className="addToCart" onClick={() => addToCart(item)}>Add to Cart</button>

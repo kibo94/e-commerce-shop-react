@@ -5,9 +5,10 @@ import LaptopIcon from "@mui/icons-material/Laptop";
 import PersonIcon from "@mui/icons-material/Person";
 import UserStatus from "../../components/userStatus/UserStatus";
 import { HeaderProps } from "../../models/HeaderProps";
-import { useQuery } from "react-query";
 import axios from "axios";
 import MenuIcon from "@mui/icons-material/Menu";
+import "./Header.scss";
+import useLocalStorageHook from "../../hooks/useLocalStorageHook";
 export const Header = ({
   authUser,
   admin,
@@ -73,8 +74,11 @@ export const Header = ({
             <h3>
               <PersonIcon /> {authUser.userName}
             </h3>
-            <button onClick={logoutUser}>
-              <Link  onClick={() =>     setIsMenuOpen(false)} to="/register">Logout</Link>
+            <button onClick={() => {
+              logoutUser()
+              setIsMenuOpen(false)
+            }}> 
+            Logout
             </button>
 
             <UserStatus userStatus={online} />

@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import {  useEffect, useState } from "react";
 // import UserStatus from "./components/userStatus/UserStatus";
 import useLocalStorageHook from "./hooks/useLocalStorageHook";
@@ -97,7 +97,7 @@ function App() {
     await axios.delete(`/logedUsers/${user.id}`);
     setAuthUser(false);
     setUser(false);
-
+ alert(1)
     navigate("/login");
 
   };

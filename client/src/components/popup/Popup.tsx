@@ -1,6 +1,6 @@
 import React from 'react'
 import { usePopUp } from '../../contexts/PopupContext';
-import "./Popup.css"
+import "./Popup.scss"
 const Popup = () => {
   const { popUp , onClose } = usePopUp();
   const {type ,  top} = popUp;

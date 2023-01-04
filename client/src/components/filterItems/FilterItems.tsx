@@ -1,5 +1,5 @@
 import React from "react";
-import "../items/Items.css"
+import "../items/Items.scss"
 interface FilterItemsModel {
   filterFruit: (inputValue:string) => void,
   type: string
