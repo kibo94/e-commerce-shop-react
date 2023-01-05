@@ -55,9 +55,7 @@ function App() {
     setOnline(parseObject(authUser));
     if (admin) {
       navigate("/admin");
-    } else {
-      navigate("/home");
-    }
+    } 
     if (parseObject(authUser).userName) {
       setAdmin(isAdmin(parseObject(authUser)));
     } else {

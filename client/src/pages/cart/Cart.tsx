@@ -1,19 +1,20 @@
-import React from 'react'
-import { ItemModel } from '../../models/Item'
+import React from "react";
+import { ItemModel } from "../../models/Item";
+import "./Cart.scss";
 interface CartModel {
-    cart:ItemModel[]
+  cart: ItemModel[];
 }
-const Cart = ({cart}:CartModel) => {
-  console.log(cart)
+const Cart = ({ cart }: CartModel) => {
   return (
-    <div>
-     
+    <div className="Cart">
       <ul>
-      <h1>Items</h1>
-        {cart.length > 0 ? cart.map((cartItem:ItemModel) => <li>{cartItem.name}</li>) : null}
+        <h1>Items</h1>
+        {cart.length > 0
+          ? cart.map((cartItem: ItemModel) => <li>{cartItem.name}</li>)
+          : null}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
