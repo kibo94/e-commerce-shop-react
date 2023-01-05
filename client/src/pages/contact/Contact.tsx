@@ -3,7 +3,6 @@ import "./Contact.scss";
 
 import emailjs from "@emailjs/browser";
 export function Contact() {
-  const apiKey = "d35132bd61984fa6b34ea7c10009ab22";
   const templatId = "template_4t5v9r6";
   const publicKey = "PT-wAj6E7mOK3mpqM";
   const serviceId = "service_4hto9qi";
@@ -18,9 +17,11 @@ export function Contact() {
       0,
       form.current.children.length - 1
     );
-    inputs.forEach((input: any) => (input.value = ""));
+     console.log(form.current)
     emailjs.sendForm(serviceId, templatId, form.current, publicKey).then(
-      (result) => {},
+      (result) => {
+        console.log(result)
+      },
       (error) => {}
     );
     inputs.forEach((input: any) => (input.value = ""));

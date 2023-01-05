@@ -26,7 +26,7 @@
   &.dark::before {
     position: absolute;
     left: 5px;
-    background: #333;
+    background: black;
     top: 50%;
     transform: translate(15px, -50%);
     transition: all ease-in 0.3s;

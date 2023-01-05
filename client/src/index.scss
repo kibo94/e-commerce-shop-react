@@ -34,3 +34,17 @@ code {
   color: red;
   margin: 10px 0;
 }
+
+body {
+  .dark {
+    background: #333!important;
+
+    header{
+      background: #333!important;
+      border-bottom: 2px solid wheat;
+    }
+    .burgerIcon{
+      color: white;
+    }
+  }
+}

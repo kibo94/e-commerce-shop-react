@@ -21,6 +21,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Contact from "./pages/contact/Contact";
 import axios from "axios";
 import Admin from "./pages/admin/Admin";
+import Cart from "./pages/cart/Cart";
+import { ItemModel } from "./models/Item";
 
 
 function App() {
@@ -37,7 +39,18 @@ function App() {
   const navigate = useNavigate();
   const itemsRoutes = ["fruits", "vegetables", "laptops"];
   const [online, setOnline] = useUserTimeOut(user);
+  const [cart,setCart] = useState<ItemModel[]>([])
   const queryClient = new QueryClient()
+  useEffect(() => {
+    const mode = getMode(value)
+    if(mode === "dark") {
+      document.body.classList.add("dark")
+    }
+    else {
+      document.body.classList.remove("dark")
+    }
+  
+  },[])
   useEffect(() => {
     setOnline(parseObject(authUser));
     if (admin) {
@@ -100,6 +113,9 @@ function App() {
     navigate("/login");
 
   };
+  function addToCart (item:ItemModel) {
+      setCart([...cart,item])
+  }
 
   const appClass = `App ${getMode(value)}`;
 
@@ -126,7 +142,7 @@ function App() {
           return (
             <Route
               path={`/${item}`}
-              element={<Items type={item} isAdmin={admin} />}
+              element={<Items type={item} isAdmin={admin} addToCart={addToCart} />}
             />
           );
         })}
@@ -139,6 +155,7 @@ function App() {
         />
         <Route path="/register" element={<Register user={authUser} />} />
         <Route path="/contact" element={<Contact  />} />
+        <Route path="/cart" element={<Cart cart={cart}  />} />
       </Routes>
       </QueryClientProvider>
     </div>

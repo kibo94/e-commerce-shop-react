@@ -2,22 +2,16 @@
   text-align: center;
   background: white;
   height: calc(100vh - 25px);
-}
-.App.dark {
-  background: #333;
-  transition: all 0.3s ease;
-  
-  
-}
-@media only screen and (max-width: 1024px) {
-  .App {
-    height: auto;
-  }
-}
-.App.light {
   background: white;
   transition: all 0.3s ease;
+
+  @media only screen and (max-width: 1024px) {
+    .App {
+      height: auto;
+    }
+  }
 }
+
 
 
 .StopWatch {

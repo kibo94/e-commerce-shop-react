@@ -8,7 +8,7 @@ import { HeaderProps } from "../../models/HeaderProps";
 import axios from "axios";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./Header.scss";
-import useLocalStorageHook from "../../hooks/useLocalStorageHook";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export const Header = ({
   authUser,
   admin,
@@ -30,43 +30,62 @@ export const Header = ({
   };
   let headerClass = "";
   if (isMenuOpen) {
-    headerClass = "active"
+    headerClass = "active";
   }
   return (
     <header className={headerClass} style={{ backgroundColor: headerColor }}>
       {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
       <div className="burger" onClick={toggleBurgerMenu}>
-        <MenuIcon />
+        <MenuIcon className="burgerIcon" />
       </div>
+      <div className="border"></div>
       <nav>
         <div>
           {admin ? (
             <div className="leftLinks">
-              <Link onClick={() =>     setIsMenuOpen(false)} to="/addItem">AddItem</Link>
-              <Link onClick={() =>     setIsMenuOpen(false)} to="/items">Items</Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/addItem">
+                AddItem
+              </Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/items">
+                Items
+              </Link>
             </div>
           ) : (
             <div className="leftLinks">
-              <Link  onClick={() =>     setIsMenuOpen(false)}  to="/home">Home</Link>
-              <Link  onClick={() =>     setIsMenuOpen(false)} to="/fruits">Fruits</Link>
-              <Link  onClick={() =>     setIsMenuOpen(false)} to="/vegetables">Vegetables</Link>
-              <Link  onClick={() =>     setIsMenuOpen(false)} to="/laptops">
+              <Link onClick={() => setIsMenuOpen(false)} to="/home">
+                Home
+              </Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/fruits">
+                Fruits
+              </Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/vegetables">
+                Vegetables
+              </Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/laptops">
                 Laptops <LaptopIcon />
               </Link>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
+                Contact
+              </Link>
             </div>
           )}
-     
         </div>
 
         <div className="auth">
           {!authUser.userName ? (
             <>
-              <Link  onClick={() =>     setIsMenuOpen(false)} to="/login">Login</Link>
-              <Link  onClick={() =>     setIsMenuOpen(false)} to="/register">Register</Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/login">
+                Login
+              </Link>
+              <Link onClick={() => setIsMenuOpen(false)} to="/register">
+                Register
+              </Link>
             </>
           ) : null}
           <ScreenMode />
+          <Link onClick={() => setIsMenuOpen(false)} to="/cart">
+            <ShoppingCartIcon className="cart" />
+          </Link>
         </div>
 
         {authUser.userName ? (
@@ -74,11 +93,13 @@ export const Header = ({
             <h3>
               <PersonIcon /> {authUser.userName}
             </h3>
-            <button onClick={() => {
-              logoutUser()
-              setIsMenuOpen(false)
-            }}> 
-            Logout
+            <button
+              onClick={() => {
+                logoutUser();
+                setIsMenuOpen(false);
+              }}
+            >
+              Logout
             </button>
 
             <UserStatus userStatus={online} />

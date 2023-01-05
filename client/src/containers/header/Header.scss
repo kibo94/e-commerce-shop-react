@@ -62,8 +62,9 @@ header {
 
      .auth {
         display: flex;
+        align-items: center;
       }
-      
+ 
   }
   .leftLinks {
     display: flex;
@@ -80,6 +81,7 @@ header {
     }
     &.active {
       height: 100vh;
+       
     }
 
     &.active {

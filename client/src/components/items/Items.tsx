@@ -12,8 +12,9 @@ import "./Items.scss"
 interface ItemsModel {
   type: string;
   isAdmin: boolean;
+  addToCart?: (item:ItemModel) => void
 }
-export const Items = ({ type, isAdmin }: ItemsModel) => {
+export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
   const [query, setQuery] = useState("");
   const [items, setItems] = useFetchItems(type);
   const { value } = useTheme();
@@ -76,6 +77,11 @@ export const Items = ({ type, isAdmin }: ItemsModel) => {
     setIsEditModaOpen(false);
   };
   const addToCartHandler = async (item: ItemModel) => {
+    if(addToCart) {
+      addToCart(item)
+    }
+
+    
     // const findedItemIndex = items.findIndex(
     //   (myItem: ItemModel) => myItem.id === item.id
     // );
