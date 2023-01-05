@@ -1,8 +1,8 @@
 .App {
   text-align: center;
-  background: white;
+
   height: calc(100vh - 25px);
-  background: white;
+
   transition: all 0.3s ease;
 
   @media only screen and (max-width: 1024px) {
@@ -87,7 +87,7 @@
 .form input,textarea{
   padding: 19px 20px;
   border-radius: 20px;
-  border: none;
+
 }
 
 .form input[type="submit"]{
@@ -164,4 +164,10 @@ ul.list .link4{
 ul.list .link5{
   background: orange;
   color: white;
+}
+
+.form {
+  .send:disabled ,  .send:disabled:hover {
+    background: rgb(94, 87, 87);
+}
 }

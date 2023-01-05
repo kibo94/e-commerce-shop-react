@@ -34,9 +34,12 @@ code {
   color: red;
   margin: 10px 0;
 }
-
+input {
+  border: 2px solid black;
+}
 body {
-  .dark {
+  background: white;
+  &.dark {
     background: #333!important;
 
     header{
@@ -44,6 +47,11 @@ body {
       border-bottom: 2px solid wheat;
     }
     .burgerIcon{
+      color: white;
+    }
+    input {
+      border: 2px solid wheat;
+      background: none;
       color: white;
     }
   }

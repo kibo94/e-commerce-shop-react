@@ -50,7 +50,7 @@ function App() {
       document.body.classList.remove("dark")
     }
   
-  },[])
+  },[value])
   useEffect(() => {
     setOnline(parseObject(authUser));
     if (admin) {
