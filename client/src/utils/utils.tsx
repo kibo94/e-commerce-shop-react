@@ -50,45 +50,31 @@ export function validateField(field: any, value: any) {
   const invalidEmail = "Email is not valid!!";
 
   let message = "";
+
+  if (value.length <= 0) {
+    message = cantBeEmpty;
+    return message;
+  }
   switch (field) {
     case "name": {
-      if (value.length === 0) {
-        message = cantBeEmpty;
-        break;
-      }
       if (value.length <= 3) {
         message = `${field} should have minimum ${3} chars`;
       }
       break;
     }
     case "email": {
-      console.log(3);
-      if (value.length <= 0) {
-        message = cantBeEmpty;
-        break;
-      }
       if (!validateEmail(value)) {
         message = invalidEmail;
       }
       break;
     }
     case "username": {
-      console.log(3);
-      if (value.length <= 0) {
-        message = cantBeEmpty;
-        break;
-      }
       if (value.length <= 3) {
-        console.log(2);
         message = `${field} should have minimum ${3} chars`;
       }
       break;
     }
     case "message": {
-      if (value.length <= 0) {
-        message = cantBeEmpty;
-        break;
-      }
       if (value.length <= 20) {
         message = `${field} should have minimum ${20} chars`;
       }
@@ -96,10 +82,6 @@ export function validateField(field: any, value: any) {
     }
 
     case "password": {
-      if (value.length <= 0) {
-        message = cantBeEmpty;
-        break;
-      }
       if (value.length <= 3) {
         message = `${field} should have minimum ${3} chars`;
       }
@@ -110,8 +92,6 @@ export function validateField(field: any, value: any) {
       break;
     }
   }
-  console.log(message);
-
   return message;
 }
 export function validateEmail(email: string) {
