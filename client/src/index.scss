@@ -35,7 +35,18 @@ code {
   margin: 10px 0;
 }
 input {
+  outline: none;
   border: 2px solid black;
+  &.err{
+    border: 2px solid red!important;
+  }
+}
+textarea {
+  outline: none;
+  border: 2px solid black;
+  &.err{
+    border: 2px solid red!important;
+  }
 }
 body {
   background: white;

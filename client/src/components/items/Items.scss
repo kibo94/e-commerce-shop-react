@@ -25,6 +25,10 @@
 
     &:focus {
       outline: none;
+      border: none;
+    }
+    &:visited {
+      outline: none;
     }
   }
 }
