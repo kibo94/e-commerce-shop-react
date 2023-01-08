@@ -1,8 +1,13 @@
 import "./App.scss";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // import UserStatus from "./components/userStatus/UserStatus";
 import useLocalStorageHook from "./hooks/useLocalStorageHook";
-import { getMode, isAdmin, parseObject } from "./utils/utils";
+import {
+  getMode,
+  isAdmin,
+  parseObject,
+  updateListOfItems,
+} from "./utils/utils";
 import Home from "./pages/home/Home";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { AddItem } from "./pages/admin/addItem/AddItem";
@@ -11,7 +16,7 @@ import { Register } from "./pages/register/Register";
 import { useTheme } from "./contexts/ThemeContextProvider";
 import { Header } from "./containers/header/Header";
 import { Items } from "./components/items/Items";
-import {  ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Popup from "./components/popup/Popup";
 import { usePopUp } from "./contexts/PopupContext";
@@ -23,7 +28,6 @@ import axios from "axios";
 import Admin from "./pages/admin/Admin";
 import Cart from "./pages/cart/Cart";
 import { ItemModel } from "./models/Item";
-
 
 function App() {
   const { popUp } = usePopUp();
@@ -39,23 +43,21 @@ function App() {
   const navigate = useNavigate();
   const itemsRoutes = ["fruits", "vegetables", "laptops"];
   const [online, setOnline] = useUserTimeOut(user);
-  const [cart,setCart] = useState<ItemModel[]>([])
-  const queryClient = new QueryClient()
+  const [cart, setCart] = useState<ItemModel[]>([]);
+  const queryClient = new QueryClient();
   useEffect(() => {
-    const mode = getMode(value)
-    if(mode === "dark") {
-      document.body.classList.add("dark")
+    const mode = getMode(value);
+    if (mode === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
     }
-    else {
-      document.body.classList.remove("dark")
-    }
-  
-  },[value])
+  }, [value]);
   useEffect(() => {
     setOnline(parseObject(authUser));
     if (admin) {
       navigate("/admin");
-    } 
+    }
     if (parseObject(authUser).userName) {
       setAdmin(isAdmin(parseObject(authUser)));
     } else {
@@ -92,79 +94,111 @@ function App() {
     setStapWatchPlay(!stopWatchPlay);
   };
 
-  const loginUser = (username: string, password: string,id:any) => {
-    console.log(id)
+  const loginUser = (username: string, password: string, id: any) => {
+    console.log(id);
     setAuthUser(
       JSON.stringify({
         userName: username,
         password: password,
-        id
+        id,
       })
+
     );
     navigate("/home");
   };
-  const logoutUserHandler =  async (user:User) => {
-    console.log(user)
+  const logoutUserHandler = async (user: User) => {
+    console.log(user);
     await axios.delete(`/logedUsers/${user.id}`);
     setAuthUser(false);
     setUser(false);
     navigate("/login");
-
   };
-  function addToCart (item:ItemModel) {
-      setCart([...cart,item])
+  function addToCart(item: ItemModel) {
+    if(cart.length == 0) {
+      setCart([...cart,{...item,quantity:1}]);
+    }
+    else {
+      const alreadyExists = cart.find(c => c.id == item.id)
+      if(alreadyExists) {
+        alreadyExists.quantity = alreadyExists.quantity + 1;
+        const updatedItems = updateListOfItems(cart, alreadyExists);
+        setCart(updatedItems);
+      }
+      else {
+        setCart([...cart,{...item,quantity:1}]);
+      }
+    }
   }
-
+    
+  function updateItemQuantityHandler(item: ItemModel) {
+    const newItem = { ...item };
+    newItem.quantity = newItem.quantity + 1;
+    const updatedItems = updateListOfItems(cart, newItem);
+    setCart(updatedItems);
+    // setMyCart(updatedItems);
+  }
+  function deleteItemHandler(id: number) {
+    setCart(cart.filter((cart) => cart.id !== id));
+  }
   const appClass = `App ${getMode(value)}`;
 
   return (
     <div className={appClass} onClick={backStatusOnline}>
-           <QueryClientProvider client={queryClient}>
-      {popUp.display ? <Popup /> : null}
-      {/* <MemoTeste myUser={myUser}/> */}
-      <ToastContainer />
+      <QueryClientProvider client={queryClient}>
+        {popUp.display ? <Popup /> : null}
+        {/* <MemoTeste myUser={myUser}/> */}
+        <ToastContainer />
 
-      {/* <button onClick={() => setMyUser(myUser==="red" ? "blue" : "red")}>Change user</button> */}
-      {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
-      <Header
-        admin={admin}
-        authUser={parseObject(authUser)}
-        logoutUser={() => logoutUserHandler(parseObject(authUser))}
-        online={online}
-      />
-
-      <Routes>
-        <Route path="/home" element={<Home user={parseObject(authUser)} />} />
-
-        {itemsRoutes.map((item) => {
-          return (
-            <Route
-              path={`/${item}`}
-              element={<Items type={item} isAdmin={admin} addToCart={addToCart} />}
-            />
-          );
-        })}
-        <Route path="/admin" element={<Admin  />} />
-        <Route path="/items" element={<AdminItems isAdmin={admin} />} />
-        {<Route path="/addItem" element={<AddItem admin={admin} />} />}
-        <Route
-          path="/login"
-          element={<Login login={loginUser} user={parseObject(authUser)} />}
+        {/* <button onClick={() => setMyUser(myUser==="red" ? "blue" : "red")}>Change user</button> */}
+        {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
+        <Header
+          admin={admin}
+          authUser={parseObject(authUser)}
+          logoutUser={() => logoutUserHandler(parseObject(authUser))}
+          online={online}
         />
-        <Route path="/register" element={<Register user={authUser} />} />
-        <Route path="/contact" element={<Contact  />} />
-        <Route path="/cart" element={<Cart cart={cart}  />} />
-      </Routes>
+
+        <Routes>
+          <Route path="/home" element={<Home user={parseObject(authUser)} />} />
+
+          {itemsRoutes.map((item) => {
+            return (
+              <Route
+                path={`/${item}`}
+                element={
+                  <Items type={item} isAdmin={admin} addToCart={addToCart} />
+                }
+              />
+            );
+          })}
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/items" element={<AdminItems isAdmin={admin} />} />
+          {<Route path="/addItem" element={<AddItem admin={admin} />} />}
+          <Route
+            path="/login"
+            element={<Login login={loginUser} user={parseObject(authUser)} />}
+          />
+          <Route path="/register" element={<Register user={authUser} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/cart"
+            element={
+              <Cart
+                cart={cart}
+                deleteItem={deleteItemHandler}
+                updateItemQuantity={updateItemQuantityHandler}
+              />
+            }
+          />
+        </Routes>
       </QueryClientProvider>
     </div>
-
   );
 }
 
 export default App;
 
-
-const useUserTimeOut = (user:User) => {
+const useUserTimeOut = (user: User) => {
   const [online, setOnline] = useState(false);
   const offlineModeTurnOn = 3000;
   useEffect(() => {
@@ -176,6 +210,6 @@ const useUserTimeOut = (user:User) => {
     return () => {
       clearTimeout(userOnlineTimeOut);
     };
-  }, [online,user]);
-  return [online, setOnline] as const
-}
+  }, [online, user]);
+  return [online, setOnline] as const;
+};
