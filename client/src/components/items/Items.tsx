@@ -37,7 +37,7 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
   };
 
   const deleteVegetableHandler = async (id: number) => {
-    await axios.delete(`/items/${id}`);
+    await axios.delete(`/products/${id}`);
     const updatedItems = deleteItemfromList(items, id);
     setItems(updatedItems);
     toast.success("Item has been deleted");
@@ -58,7 +58,7 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
     try {
       if (singleItem) {
         console.log(updatedItem)
-        await axios.put(`/${singleItem?.type}/${singleItem.id}`, {
+        await axios.put(`/products/${singleItem.id}`, {
           ...singleItem,
           ...updatedItem
         });
