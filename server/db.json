@@ -23,13 +23,13 @@
       "id": 5
     }
   ],
-  "products":[
+  "products": [
     {
       "id": 1,
       "name": "ananas",
       "author": "typicode223",
       "type": "fruits",
-      "price":300,
+      "price": 300,
       "quantity": 3
     },
     {
@@ -38,7 +38,7 @@
       "author": "typicode223",
       "type": "fruits",
       "quantity": 3,
-      "price":200
+      "price": 200
     },
     {
       "id": 3,
@@ -46,7 +46,7 @@
       "author": "typicode223",
       "type": "fruits",
       "quantity": 3,
-      "price":100
+      "price": 100
     },
     {
       "id": 0.6631851845583496,
@@ -54,7 +54,7 @@
       "author": "typicode223",
       "type": "fruits",
       "quantity": "5",
-      "price":400
+      "price": 400
     },
     {
       "id": 0.32046634623619985,
@@ -62,7 +62,7 @@
       "author": "typicode223",
       "type": "fruits",
       "quantity": "5",
-      "price":500
+      "price": 500
     },
     {
       "id": 0.9613494633303827,
@@ -70,7 +70,7 @@
       "author": "typicode223",
       "type": "laptops",
       "quantity": 0,
-       "price":30000
+      "price": 30000
     },
     {
       "id": 0.8010785937762817,
@@ -78,7 +78,7 @@
       "author": "typicode223",
       "type": "laptops",
       "quantity": 3,
-      "price":35000
+      "price": 35000
     },
     {
       "id": 0.2710531612825646,
@@ -86,7 +86,7 @@
       "author": "typicode223",
       "type": "laptops",
       "quantity": 3,
-      "price":180000
+      "price": 180000
     },
     {
       "id": 0.5753682641423663,
@@ -94,14 +94,15 @@
       "author": "typicode223",
       "type": "laptops",
       "quantity": 3,
-      "price":100000
-    },   {
+      "price": 100000
+    },
+    {
       "id": 1,
       "name": "grasak",
       "author": "typicode223",
       "type": "vegetables",
       "quantity": 3,
-      "price":300
+      "price": 300
     },
     {
       "id": 0.7193151800102087,
@@ -109,15 +110,15 @@
       "author": "typicode223",
       "type": "vegetables",
       "quantity": 3,
-      "price":250
+      "price": 250
     },
     {
       "id": 0.06581150853731477,
       "name": "boranija",
       "author": "typicode223",
       "type": "vegetables",
-      "quantity": 3,
-      "price":400
+      "quantity": 5,
+      "price": 400
     },
     {
       "id": 0.28139527398395026,
@@ -125,12 +126,9 @@
       "author": "typicode223",
       "type": "vegetables",
       "quantity": 3,
-      "price":350
+      "price": 350
     }
   ],
-
   "profiles": [],
   "logedInProfiles": []
-
-
 }
