@@ -3,7 +3,7 @@ header {
   cursor: pointer;
 
   height: 80px;
-  position: relative;
+  position: fixed;
   width: 100%;
   p {
     position: absolute;
@@ -54,6 +54,23 @@ header {
             color: #333;
             transition: all 0.3s ease-in-out;
           }
+        &.cartLink{
+          position: relative;
+          span{
+            position: absolute;
+    /* width: 12px; */
+    /* height: 30px; */
+    background: red;
+    border-radius: 50%;
+    /* line-height: 30px; */
+    height: 17px;
+    width: 17px;
+    font-size: 13px;
+    line-height: 17px;
+    left: -5px;
+    top: -1px;
+          }
+        }  
       }
       svg,
       img {

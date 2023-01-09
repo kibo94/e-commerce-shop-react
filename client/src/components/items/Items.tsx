@@ -37,7 +37,7 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
   };
 
   const deleteVegetableHandler = async (id: number) => {
-    await axios.delete(`/${type}/${id}`);
+    await axios.delete(`/items/${id}`);
     const updatedItems = deleteItemfromList(items, id);
     setItems(updatedItems);
     toast.success("Item has been deleted");
@@ -151,8 +151,8 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
 const useFetchItems = (type: string) => {
   const [items, setItems] = useState<ItemModel[]>([]);
   const fetchItems = useCallback(async () => {
-    const data = await axios.get(`/${type}`);
-    setItems(data.data);
+    const data = await axios.get(`/products`);
+    setItems(data.data.filter((item:ItemModel) => item.type == type));
   }, [type]);
   useEffect(() => {
     setItems([]);

@@ -16,7 +16,7 @@ import { Register } from "./pages/register/Register";
 import { useTheme } from "./contexts/ThemeContextProvider";
 import { Header } from "./containers/header/Header";
 import { Items } from "./components/items/Items";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Popup from "./components/popup/Popup";
 import { usePopUp } from "./contexts/PopupContext";
@@ -128,21 +128,37 @@ function App() {
         setCart([...cart,{...item,quantity:1}]);
       }
     }
+    toast.success("Cart item has been added")
   }
     
-  function updateItemQuantityHandler(item: ItemModel,e:React.ChangeEvent<HTMLInputElement>) {
-    console.log(e)
+  function updateItemQuantityHandler(item: ItemModel,type:string) {
     const newItem = { ...item };
-    newItem.quantity = e.target.value;
+    newItem.quantity =  type === "add" ? newItem.quantity + 1 : newItem.quantity -1
     const updatedItems = updateListOfItems(cart, newItem);
     setCart(updatedItems);
  
   }
   function deleteItemHandler(id: number) {
     setCart(cart.filter((cart) => cart.id !== id));
+    toast.success("Cart item has been removed")
   }
   const appClass = `App ${getMode(value)}`;
+async function finishShopingHandler () {
+  const items = await (await axios("/products")).data;
+   items.map( async (item:ItemModel) =>  {
+    const findedItem = cart.find(cartItem => cartItem.id === item.id)
+    if(findedItem) {
+      item.quantity = +item.quantity - +findedItem?.quantity;
+      await axios.put(`/products/${item.id}`,item)
+    
+    }
+  
+  })
 
+
+  setCart([])
+  toast.success("Shoping has been finished")
+}
   return (
     <div className={appClass} onClick={backStatusOnline}>
       <QueryClientProvider client={queryClient}>
@@ -153,6 +169,7 @@ function App() {
         {/* <button onClick={() => setMyUser(myUser==="red" ? "blue" : "red")}>Change user</button> */}
         {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
         <Header
+        cart={cart}
           admin={admin}
           authUser={parseObject(authUser)}
           logoutUser={() => logoutUserHandler(parseObject(authUser))}
@@ -185,6 +202,8 @@ function App() {
             path="/cart"
             element={
               <Cart
+              finishShoping={finishShopingHandler}
+              
                 cart={cart}
                 deleteItem={deleteItemHandler}
                 updateItemQuantity={updateItemQuantityHandler}

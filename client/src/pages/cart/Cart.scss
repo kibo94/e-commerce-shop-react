@@ -1,10 +1,12 @@
 .Cart {
+    position: relative;
+    top: 100px;
     @media only screen and (max-width:768px) {
         margin-top: 80px;
     }
     .heading{
         position: relative;
-        top: 20px;
+    
     }
     ul {
        margin: 0;
@@ -12,17 +14,19 @@
        margin: 0 50px;
        margin-top: 50px;
       
+      
     }
     li {
-        border: 2px solid white;
+        overflow: hidden;
         background: wheat;
-        padding: 10px;
+        padding: 30px;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         gap: 15px;
+        position: relative;
         input{
             border: 2px solid black;
             padding: 10px;
@@ -36,10 +40,50 @@
             width: 200px;
             height: 100px;
             object-fit: cover;
+            position: relative;
         }
+
+      .changeQuantity{
+        display: flex;
+        justify-content: center;
+        gap:7px;
+        align-items: center;
+        span{
+            font-weight: bold;
+        }
+        .icon{
+          border: 1px solid black;
+          padding: 5px;
+          border-radius: 6px;
+          cursor: pointer;
+          &:active {
+            outline: 2px solid white;
+            transition: 0.3s all ease-in-out;
+            
+          }
+        }
+      }  
+      .deleteItem{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+      }
+    }
+    .badge{
+        width: auto;
+        height: auto;
+        padding: 10px;
+        line-height: 25px;
+        left: 0;
+        top: 0;
+        bottom: auto;
+        right: auto;
+        background: black;
     }
     .totalPrice{
         font-size: 30px;
         margin-top: 30px;
+        
     }
 }

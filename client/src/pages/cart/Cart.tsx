@@ -3,14 +3,20 @@ import { isTemplateMiddle } from "typescript";
 import { Item } from "../../components/items/item/Item";
 import { ItemModel } from "../../models/Item";
 import { getImageSrc, updateListOfItems } from "../../utils/utils";
+import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import "./Cart.scss";
+import { AdbSharp } from "@mui/icons-material";
+import PriceBadge from "../../components/badge/PriceBadge";
 interface CartModel {
   cart: ItemModel[];
   deleteItem: (id: number) => void;
-  updateItemQuantity: (item: ItemModel,e:React.ChangeEvent<HTMLInputElement>) => void;
+  updateItemQuantity: (item: ItemModel,type:string) => void;
+  finishShoping: () => void;
 }
 
-const Cart = ({ cart, updateItemQuantity, deleteItem }: CartModel) => {
+const Cart = ({ cart, updateItemQuantity, deleteItem , finishShoping}: CartModel) => {
   let  totalPrice = 0
 cart.forEach(c => {
    totalPrice += c.price * c.quantity;
@@ -25,24 +31,28 @@ cart.forEach(c => {
               <li>
                 <img src={getImageSrc(cartItem.type)} />
                 <h3>{cartItem.name} </h3>
-
-                <input
+                <div className="changeQuantity">
+                  <AddIcon className="icon" onClick={() => updateItemQuantity(cartItem,"add")}/>
+                  <RemoveIcon className="icon" onClick={() => updateItemQuantity(cartItem,"sub")} />
+                  <span>Q : {cartItem.quantity}</span>
+                </div>
+                {/* <input
                   type="number"
                   id="quantity"
                   name="quantity"
                   min="1"
                   value={cartItem.quantity}
                   onChange={(e) => updateItemQuantity(cartItem,e)}
-                ></input>
-                <p>{cartItem.price} rsd</p>
-                <button onClick={() => deleteItem(cartItem.id)}>
-                  Delete item
-                </button>
+                ></input> */}
+                <PriceBadge price={cartItem.price} key={cartItem.id}/>
+                <CloseIcon className="deleteItem" onClick={() => deleteItem(cartItem.id)}/>
+
               </li>
             ))
           : null}
       </ul>
      {cart.length > 0 ?  <h3 className="totalPrice">Total price : {totalPrice}</h3> : null}
+     {cart.length > 0 ? <button onClick={finishShoping}>Finish shoping</button> : null}
     </div>
   );
 };

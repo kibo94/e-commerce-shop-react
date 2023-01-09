@@ -14,6 +14,7 @@ export const Header = ({
   admin,
   logoutUser,
   online,
+  cart
 }: HeaderProps) => {
   let headerColor = "orange";
   if (admin) {
@@ -83,7 +84,8 @@ export const Header = ({
             </>
           ) : null}
           <ScreenMode />
-          <Link onClick={() => setIsMenuOpen(false)} to="/cart">
+          <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink">
+            <span>{cart.length}</span>
             <ShoppingCartIcon className="cart" />
           </Link>
         </div>

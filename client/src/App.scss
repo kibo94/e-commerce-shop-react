@@ -174,7 +174,11 @@ ul.list .link5{
 
 .responsiveGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, 300px);
   gap: 50px;
-  
+  @media(max-width:768px) {
+    grid-template-columns:1fr;
+
+}
+
 }
