@@ -130,12 +130,13 @@ function App() {
     }
   }
     
-  function updateItemQuantityHandler(item: ItemModel) {
+  function updateItemQuantityHandler(item: ItemModel,e:React.ChangeEvent<HTMLInputElement>) {
+    console.log(e)
     const newItem = { ...item };
-    newItem.quantity = newItem.quantity + 1;
+    newItem.quantity = e.target.value;
     const updatedItems = updateListOfItems(cart, newItem);
     setCart(updatedItems);
-    // setMyCart(updatedItems);
+ 
   }
   function deleteItemHandler(id: number) {
     setCart(cart.filter((cart) => cart.id !== id));

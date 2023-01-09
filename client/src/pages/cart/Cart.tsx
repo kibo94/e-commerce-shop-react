@@ -6,31 +6,43 @@ import { getImageSrc, updateListOfItems } from "../../utils/utils";
 import "./Cart.scss";
 interface CartModel {
   cart: ItemModel[];
-  deleteItem:(id:number) => void;
-  updateItemQuantity:(item:ItemModel) => void;
+  deleteItem: (id: number) => void;
+  updateItemQuantity: (item: ItemModel,e:React.ChangeEvent<HTMLInputElement>) => void;
 }
-const Cart = ({ cart , updateItemQuantity , deleteItem}: CartModel) => {
- 
 
+const Cart = ({ cart, updateItemQuantity, deleteItem }: CartModel) => {
+  let  totalPrice = 0
+cart.forEach(c => {
+   totalPrice += c.price * c.quantity;
+})
   return (
     <div className="Cart">
-      <ul>
-        <h1>Items</h1>
+      {cart.length > 0 ?    <h1  className="heading">Items</h1> : <h1 className="heading">Empy cart</h1>}
+   
+      <ul className="responsiveGrid">
         {cart.length > 0
-          ?  cart.map((cartItem: ItemModel) => (
+          ? cart.map((cartItem: ItemModel) => (
               <li>
-                <img src={getImageSrc(cartItem.type)}/>
+                <img src={getImageSrc(cartItem.type)} />
                 <h3>{cartItem.name} </h3>
-                <button onClick={() => deleteItem(cartItem.id)}>Delete item</button>
+
                 <input
-                  onChange={() => updateItemQuantity(cartItem)}
                   type="number"
+                  id="quantity"
+                  name="quantity"
+                  min="1"
                   value={cartItem.quantity}
-                />
+                  onChange={(e) => updateItemQuantity(cartItem,e)}
+                ></input>
+                <p>{cartItem.price} rsd</p>
+                <button onClick={() => deleteItem(cartItem.id)}>
+                  Delete item
+                </button>
               </li>
             ))
           : null}
       </ul>
+     {cart.length > 0 ?  <h3 className="totalPrice">Total price : {totalPrice}</h3> : null}
     </div>
   );
 };
