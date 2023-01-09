@@ -95,42 +95,7 @@
       "type": "laptops",
       "quantity": 3,
       "price":100000
-    }
-  ],
-  "laptops": [
-    {
-      "id": 0.9613494633303827,
-      "name": "Lenovo 300",
-      "author": "typicode223",
-      "type": "laptops",
-      "quantity": 0,
-       "price":30000
-    },
-    {
-      "id": 0.8010785937762817,
-      "name": "lenovo 2000",
-      "author": "typicode223",
-      "type": "laptops",
-      "quantity": 3,
-      "price":35000
-    },
-    {
-      "id": 0.2710531612825646,
-      "name": "mac book pro i6",
-      "author": "typicode223",
-      "type": "laptops",
-      "quantity": 3,
-      "price":180000
-    },
-    {
-      "id": 0.5753682641423663,
-      "name": "Lenovo 123",
-      "author": "typicode223",
-      "type": "laptops",
-      "quantity": 3,
-      "price":100000
-    },
-    {
+    },   {
       "id": 1,
       "name": "grasak",
       "author": "typicode223",
@@ -163,6 +128,7 @@
       "price":350
     }
   ],
+
   "profiles": [],
   "logedInProfiles": []
 
