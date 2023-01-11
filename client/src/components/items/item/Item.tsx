@@ -26,7 +26,7 @@ export const Item = ({
 }:SingleItem) => {
   const badgeInfo = {type:"red",text:""};
 
-if(item.quantity == 0) {
+if(item.quantity <= 0) {
   console.log(item.quantity);
   badgeInfo.type = "red";
   badgeInfo.text = `No more on stack`
@@ -49,7 +49,7 @@ console.log(item.quantity)
         
         </div>
         {!isAdmin ? (
-            +item.quantity === 0 ? (
+            +item.quantity <= 0 ? (
               <p className="noMore" >Check avelability </p>
             ) : (
               <button className="addToCart" onClick={() => addToCart(item)}>Add to Cart</button>

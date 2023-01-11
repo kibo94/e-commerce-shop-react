@@ -55,9 +55,7 @@ function App() {
   }, [value]);
   useEffect(() => {
     setOnline(parseObject(authUser));
-    if (admin) {
-      navigate("/admin");
-    }
+    
     if (parseObject(authUser).userName) {
       setAdmin(isAdmin(parseObject(authUser)));
     } else {
@@ -189,7 +187,7 @@ async function finishShopingHandler () {
               />
             );
           })}
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Admin isAdmin={admin} />} />
           <Route path="/items" element={<AdminItems isAdmin={admin} />} />
           {<Route path="/addItem" element={<AddItem admin={admin} />} />}
           <Route

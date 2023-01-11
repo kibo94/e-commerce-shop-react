@@ -11,6 +11,7 @@ header {
     translate: -50%;
     font-size: 30px;
   }
+  padding: 0 20px;
   
 .status {
     width: 20px;
@@ -55,6 +56,13 @@ header {
             transition: all 0.3s ease-in-out;
           }
         &.cartLink{
+          @media only screen and (max-width: 1024px) {
+              margin: 0;
+               top: 30px;
+               right: 30px;
+              position: absolute;
+            
+          }
           position: relative;
           span{
             position: absolute;
