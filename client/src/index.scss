@@ -55,15 +55,30 @@ body {
 
     header{
       background: #333!important;
-      border-bottom: 2px solid wheat;
+      // border-bottom: 2px solid wheat;
     }
     .burgerIcon{
       color: white;
+    }
+    nav{
+      background: #333!important;
     }
     input {
       border: 2px solid wheat;
       background: none;
       color: white;
+    }
+    .totalPrice{
+      background: wheat;
+      h3 , button {
+        color: black;
+      }
+      h3:hover {
+        color: #333;
+      }
+      button:hover {
+        color: #333;
+      }
     }
   }
 }

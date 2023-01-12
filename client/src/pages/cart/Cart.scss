@@ -1,89 +1,126 @@
 .Cart {
+  position: relative;
+  overflow-y: scroll;
+  top: 100px;
+  @media only screen and (max-width: 768px) {
+    margin-top: 20px;
+  }
+  .heading {
     position: relative;
-    top: 100px;
-    @media only screen and (max-width:768px) {
-        margin-top: 80px;
-    }
-    .heading{
-        position: relative;
-    
-    }
-    ul {
-       margin: 0;
-       padding: 0;
-       margin: 0 50px;
-       margin-top: 50px;
-      
-      
-    }
-    li {
-        overflow: hidden;
-        background: wheat;
-        padding: 30px;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        position: relative;
-        input{
-            border: 2px solid black;
-            padding: 10px;
-    background: black;
-        }
-        p{
-            text-align: center;
-            margin: 0;
-        }
-        img{
-            width: 200px;
-            height: 100px;
-            object-fit: cover;
-            position: relative;
-        }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    margin: 0 50px;
+    margin-top: 50px;
+    margin-bottom: 200px;
 
-      .changeQuantity{
-        display: flex;
-        justify-content: center;
-        gap:7px;
-        align-items: center;
-        span{
-            font-weight: bold;
-        }
-        .icon{
-          border: 1px solid black;
-          padding: 5px;
-          border-radius: 6px;
-          cursor: pointer;
-          &:active {
-            outline: 2px solid white;
-            transition: 0.3s all ease-in-out;
-            
-          }
-        }
-      }  
-      .deleteItem{
-        position: absolute;
-        right: 10px;
-        top: 10px;
+  }
+  li {
+    overflow: hidden;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    input {
+      border: 2px solid black;
+      padding: 10px;
+      background: black;
+    }
+    p {
+      text-align: center;
+      margin: 0;
+    }
+    img {
+      width: 200px;
+      height: 100px;
+      object-fit: cover;
+      position: relative;
+    }
+
+    .changeQuantity {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      align-items: center;
+      span {
+        font-weight: bold;
+      }
+      .icon {
+        border: 1px solid black;
+        padding: 5px;
+        border-radius: 6px;
         cursor: pointer;
+        &:active {
+          outline: 2px solid white;
+          transition: 0.3s all ease-in-out;
+        }
       }
     }
-    .badge{
-        width: auto;
-        height: auto;
-        padding: 10px;
-        line-height: 25px;
-        left: 0;
-        top: 0;
-        bottom: auto;
-        right: auto;
-        background: black;
+    .deleteItem {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
     }
-    .totalPrice{
-        font-size: 30px;
-        margin-top: 30px;
-        
+  }
+  .badge {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    line-height: 25px;
+    left: 0;
+    top: 0;
+    bottom: auto;
+    right: auto;
+    background: black;
+  }
+  .totalPrice {
+    font-size: 30px;
+    margin-top: 30px;
+
+    background: #333;
+    display: flex;
+    justify-content: space-between;
+    animation-name: totalPrice;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+    position: fixed;
+    bottom: 0;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
+    width: 100%;
+    padding: 25px;
+    transform: translateY(100%);
+    h3 {
+      font-size: 20px;
+      color: wheat;
     }
+    button {
+      color: wheat;
+      background: none;
+      border: none;
+      outline: none;
+      font-weight: bold;
+      font-size: 20px;
+
+      &:hover {
+        color: #333;
+      }
+    }
+  }
+  @keyframes totalPrice {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
 }

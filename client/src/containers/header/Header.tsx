@@ -34,11 +34,16 @@ export const Header = ({
     headerClass = "active";
   }
   return (
+    <>
     <header className={headerClass} style={{ backgroundColor: headerColor }}>
       {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
       <div className="burger" onClick={toggleBurgerMenu}>
         <MenuIcon className="burgerIcon" />
       </div>
+      <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink mobile">
+            <span>{cart.length}</span>
+            <ShoppingCartIcon className="cart" />
+          </Link>
       <div className="border"></div>
       <nav>
         <div>
@@ -84,10 +89,11 @@ export const Header = ({
             </>
           ) : null}
           <ScreenMode />
-          <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink">
+          <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink dekstop">
             <span>{cart.length}</span>
             <ShoppingCartIcon className="cart" />
           </Link>
+         
         </div>
 
         {authUser.userName ? (
@@ -110,6 +116,8 @@ export const Header = ({
       </nav>
       {/* <h1>ITEMS{data?.data.length}</h1> */}
     </header>
+   
+    </>
   );
 };
 

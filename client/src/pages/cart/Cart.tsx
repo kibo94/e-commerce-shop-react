@@ -51,8 +51,11 @@ cart.forEach(c => {
             ))
           : null}
       </ul>
-     {cart.length > 0 ?  <h3 className="totalPrice">Total price : {totalPrice}</h3> : null}
-     {cart.length > 0 ? <button onClick={finishShoping}>Finish shoping</button> : null}
+      {cart.length > 0 ?  <div className="totalPrice">
+      <h3 >Total price : {totalPrice}</h3> 
+      <button onClick={finishShoping}>Finish shoping</button> 
+      </div>:null}
+    
     </div>
   );
 };
