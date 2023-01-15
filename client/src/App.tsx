@@ -157,6 +157,10 @@ async function finishShopingHandler () {
   setCart([])
   toast.success("Shoping has been finished")
 }
+let cartWithQuantity:ItemModel[] = [];
+if(cart.length > 0) {
+  cartWithQuantity = cart.filter(c => c.quantity > 0)
+}
   return (
     <div className={appClass} onClick={backStatusOnline}>
       <QueryClientProvider client={queryClient}>
@@ -167,7 +171,7 @@ async function finishShopingHandler () {
         {/* <button onClick={() => setMyUser(myUser==="red" ? "blue" : "red")}>Change user</button> */}
         {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
         <Header
-        cart={cart}
+        cart={cartWithQuantity}
           admin={admin}
           authUser={parseObject(authUser)}
           logoutUser={() => logoutUserHandler(parseObject(authUser))}
@@ -202,7 +206,7 @@ async function finishShopingHandler () {
               <Cart
               finishShoping={finishShopingHandler}
               
-                cart={cart}
+                cart={cartWithQuantity}
                 deleteItem={deleteItemHandler}
                 updateItemQuantity={updateItemQuantityHandler}
               />

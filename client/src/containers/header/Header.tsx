@@ -34,11 +34,6 @@ export const Header = ({
   if (isMenuOpen) {
     headerClass = "active";
   }
-  let cartWithQuantity = [];
-  if(cart.length > 0) {
-    cartWithQuantity = cart.filter(c => c.quantity > 0)
-  }
-  console.log(headerClass)
   return (
     <>
     <header className={headerClass} style={{ backgroundColor: headerColor }}>
@@ -48,7 +43,7 @@ export const Header = ({
       </div>
       <ScreenMode classNamee={"mobile"} />
       <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink mobile">
-            <span>{cartWithQuantity.length}</span>
+            <span>{cart.length}</span>
             <ShoppingCartIcon className="cart" />
           </Link>
       <div className="border"></div>
@@ -97,7 +92,7 @@ export const Header = ({
           ) : null}
           <ScreenMode classNamee={"desktop"}/>
           <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink dekstop">
-            <span>{cartWithQuantity.length}</span>
+            <span>{cart.length}</span>
             <ShoppingCartIcon className="cart" />
           </Link>
          
