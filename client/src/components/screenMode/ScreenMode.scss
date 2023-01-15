@@ -1,6 +1,10 @@
 .mode {
   display: flex;
   align-items: center;
+  // @media only screen and (max-width: 1024px) {
+  //   position: absolute;
+  //   top:30px;
+  // }
   
 }
 .toggleMode {
@@ -26,8 +30,8 @@
 
   &.dark::before {
     position: absolute;
-    left: 5px;
-    background: black;
+    left: 0px;
+    background: wheat;
     top: 50%;
     transform: translate(15px, -50%);
     transition: all ease-in 0.3s;
