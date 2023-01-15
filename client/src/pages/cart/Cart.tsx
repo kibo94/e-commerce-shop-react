@@ -29,7 +29,9 @@ cart.forEach(c => {
         {cart.length > 0
           ? cart.map((cartItem: ItemModel) => (
               <li>
-                <img src={getImageSrc(cartItem.type)} />
+                {cartItem.quantity > 0  ? 
+                <>
+                  <img src={getImageSrc(cartItem.type)} />
                 <h3>{cartItem.name} </h3>
                 <div className="changeQuantity">
                   <AddIcon className="icon" onClick={() => updateItemQuantity(cartItem,"add")}/>
@@ -46,7 +48,10 @@ cart.forEach(c => {
                 ></input> */}
                 <PriceBadge price={cartItem.price} key={cartItem.id}/>
                 <CloseIcon className="deleteItem" onClick={() => deleteItem(cartItem.id)}/>
-
+                
+                </>
+              
+: null}
               </li>
             ))
           : null}
