@@ -1,10 +1,27 @@
 .mode {
-  display: flex;
+ 
   align-items: center;
-  // @media only screen and (max-width: 1024px) {
-  //   position: absolute;
-  //   top:30px;
-  // }
+  .desktop{
+
+    display: flex;
+  }
+  .mobile{
+    display: none;
+  }
+  @media only screen and (max-width: 1024px) {
+    .desktop{
+      
+      display: none;
+    }
+    .mobile{
+      display: flex;
+      position: absolute;
+      top:30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+   
+  }
   
 }
 .toggleMode {

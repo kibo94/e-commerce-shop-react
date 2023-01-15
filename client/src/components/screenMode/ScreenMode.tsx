@@ -3,9 +3,9 @@ import { useTheme } from "../../contexts/ThemeContextProvider";
 import { getMode, setModeValue } from "../../utils/utils";
 import "./ScreenMode.scss"
 
-function ScreenMode() {
+function ScreenMode({classNamee}:any) {
   const { value, onChange } = useTheme();
-  let toogleClass = `toggleMode ${getMode(value)}`;
+  let toogleClass = `toggleMode ${getMode(value)} ${classNamee}`;
 
   const changeModeHandler = () => {
     onChange(setModeValue(value));

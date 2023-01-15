@@ -30,6 +30,7 @@ export const Header = ({
     setIsMenuOpen(!isMenuOpen);
   };
   let headerClass = "";
+  console.log(isMenuOpen)
   if (isMenuOpen) {
     headerClass = "active";
   }
@@ -37,7 +38,7 @@ export const Header = ({
   if(cart.length > 0) {
     cartWithQuantity = cart.filter(c => c.quantity > 0)
   }
-  
+  console.log(headerClass)
   return (
     <>
     <header className={headerClass} style={{ backgroundColor: headerColor }}>
@@ -45,6 +46,7 @@ export const Header = ({
       <div className="burger" onClick={toggleBurgerMenu}>
         <MenuIcon className="burgerIcon" />
       </div>
+      <ScreenMode classNamee={"mobile"} />
       <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink mobile">
             <span>{cartWithQuantity.length}</span>
             <ShoppingCartIcon className="cart" />
@@ -93,7 +95,7 @@ export const Header = ({
               </Link>
             </>
           ) : null}
-          <ScreenMode />
+          <ScreenMode classNamee={"desktop"}/>
           <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink dekstop">
             <span>{cartWithQuantity.length}</span>
             <ShoppingCartIcon className="cart" />
