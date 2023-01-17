@@ -12,6 +12,7 @@ interface H1Styled {
 export default function Home(props: any) {
   const navigate = useNavigate();
   const [titlePrimary, setTitlePrimary] = useState(false);
+  const divRef = useRef<any>();
   const Title = styled.h1`
     font-size: 1.5em;
     text-align: center;
@@ -22,6 +23,19 @@ export default function Home(props: any) {
       vertical-align: middle;
     }
   `;
+
+ 
+  
+
+
+  // 👆 We destructure the array as a return of the useState function into two value
+  
+  // console.log(counter()); // 👈 returns 0 which it's the value of counter()
+
+
+
+  // console.log(setMyState1)
+
   let level = 0;
   useEffect(() => {
     if (!props.user) {
@@ -60,7 +74,6 @@ export default function Home(props: any) {
   const serachTerm = "grandGrand2";
   // const arr = [];
   const allCats = (items: any) => {
-    
     let res = items.filter((item: any) => {
       if (item.children && item.children.length > 0) {
         allCats(item.children);
@@ -68,23 +81,23 @@ export default function Home(props: any) {
       if (item.name.includes(serachTerm)) {
         return item;
       }
-     
     });
-console.log(res)
+    console.log(res);
     return res;
   };
 
   allCats(data);
-  const filterByLabel = (array:any, searchTerm:string) => {
-    return array.reduce((prev:any, curr:any) => {
-        const children = curr.children ? filterByLabel(curr.children, searchTerm) : undefined;
-        
-        return curr.name.includes(searchTerm) || children?.length > 0 ? [...prev, { ...curr, children }] : prev;
-    }, []);
-}
+  const filterByLabel = (array: any, searchTerm: string) => {
+    return array.reduce((prev: any, curr: any) => {
+      const children = curr.children
+        ? filterByLabel(curr.children, searchTerm)
+        : undefined;
 
-let res = filterByLabel(data, serachTerm);
-// console.log(res)
+      return curr.name.includes(searchTerm) || children?.length > 0
+        ? [...prev, { ...curr, children }]
+        : prev;
+    }, []);
+  };
 
   return (
     <div className="Home">
@@ -95,6 +108,8 @@ let res = filterByLabel(data, serachTerm);
         Home
         <CloseIcon />
       </Title>
+      <div ref={divRef}></div>
+
       {/* <RecursiveMenu /> */}
     </div>
   );

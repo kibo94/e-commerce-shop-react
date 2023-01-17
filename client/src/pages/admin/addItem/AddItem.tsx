@@ -34,9 +34,10 @@ export const AddItem = ({ admin }: AddItemProps) => {
         author: "typicode223",
         type: item,
         quantity: plusMinus,
+        price:400
       };
       try {
-        await axios.post(`/${item}`, createdItem);
+        await axios.post(`/products`, createdItem);
 
         // toast.success("Item sucessefuly added")
         onChange({
