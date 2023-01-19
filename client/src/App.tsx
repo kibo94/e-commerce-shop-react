@@ -105,11 +105,11 @@ function App() {
     navigate("/home");
   };
   const logoutUserHandler = async (user: User) => {
-    console.log(user);
-    await axios.delete(`/logedUsers/${user.id}`);
+
     setAuthUser(false);
     setUser(false);
     navigate("/login");
+
   };
   function addToCart(item: ItemModel) {
     if(cart.length == 0) {
