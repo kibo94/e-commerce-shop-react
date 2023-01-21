@@ -103,15 +103,18 @@ function App() {
     setStapWatchPlay(!stopWatchPlay);
   };
 
-  const loginUser = (username: string, password: string, id: any) => {
-
+  const loginUser = (username: string, password: string, id: any,name:string) => {
+   const user = {
+    userName: username,
+    password: password,
+    name:name,
+    id,
+   }
     setAuthUser(
-      JSON.stringify({
-        userName: username,
-        password: password,
-        id,
-      })
+      JSON.stringify(user)
     );
+    setUser(user)
+
     navigate("/home");
   };
   const logoutUserHandler = async (user: User) => {
@@ -176,7 +179,7 @@ function App() {
         <Header
           cart={cartWithQuantity}
           admin={admin}
-          authUser={parseObject(authUser)}
+          authUser={user}
           logoutUser={() => logoutUserHandler(parseObject(authUser))}
           online={online}
         />

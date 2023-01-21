@@ -1,27 +1,26 @@
-import { Email } from "@mui/icons-material";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../../models/User";
 import { checkAllFieldsAreValid, validateField } from "../../utils/utils";
 import "./Login.scss";
 
 interface LoginModel {
-  login: (username: string, password: string, id: any) => void;
+  login: (username: string, password: string, id: any,name:string) => void;
   user: User;
 }
 export const Login = ({ login, user }: LoginModel) => {
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordeRef = useRef<HTMLInputElement>(null);
   const [authError, setAuthError] = useState("");
   let [loginData, setLoginData] = useState({
     email: {
       touched: false,
       message: "",
+      value: "",
     },
     password: {
       touched: false,
       message: "",
+      value: "",
     },
   });
 
@@ -32,8 +31,8 @@ export const Login = ({ login, user }: LoginModel) => {
     }
   }, [navigate, user]);
   const loginUser = async () => {
-    const userName = usernameRef.current?.value;
-    const password = passwordeRef.current?.value;
+    const userName = loginData.email.value;
+    const password = loginData.password.value;
 
     const users = await axios.get("/users");
 
@@ -41,12 +40,8 @@ export const Login = ({ login, user }: LoginModel) => {
       (user: User) => user.userName == userName && user.password === password
     );
     if (findedUser) {
-      login(
-        usernameRef.current!.value,
-        passwordeRef.current!.value,
-        findedUser?.id
-      );
-      
+      login(userName, password, findedUser?.id,findedUser?.name);
+
       await axios.post("/logedUsers", findedUser);
       navigate("/home");
     } else {
@@ -54,12 +49,12 @@ export const Login = ({ login, user }: LoginModel) => {
     }
   };
 
- 
   const onChangeHandler = (e: any) => {
     setLoginData({
       ...loginData,
       [e.target.name]: {
         touched: true,
+        value: e.target.value,
         message: validateField(e.target.name, e.target.value),
       },
     });
@@ -73,7 +68,6 @@ export const Login = ({ login, user }: LoginModel) => {
       <form onSubmit={onLoginSubmit}>
         <input
           className={loginData.email.message.length > 0 ? "err" : ""}
-          ref={usernameRef}
           placeholder="Enter Email..."
           type="text"
           onChange={onChangeHandler}
@@ -85,14 +79,13 @@ export const Login = ({ login, user }: LoginModel) => {
 
         <input
           className={loginData.password.message.length > 0 ? "err" : ""}
-          ref={passwordeRef}
           placeholder="Enter password..."
           type="text"
           onChange={onChangeHandler}
           name="password"
         />
         {loginData.password.message.length > 0 && loginData.password.touched ? (
-          <p  className="err">{loginData.password.message}</p>
+          <p className="err">{loginData.password.message}</p>
         ) : null}
         <input
           type="submit"

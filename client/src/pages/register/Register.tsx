@@ -11,15 +11,18 @@ export const Register = ({user}:RegisterModel) => {
   const [registerData,setRegisterData] = useState( {
     name:{
       touched:false,
-      message : ""
+      message : "",
+      value:""
     },
     email:{
       touched:false,
-      message : ""
+      message : "",
+      value:""
     },
     password:{
       touched:false,
-      message : ""
+      message : "",
+      value:""
     },
 
   })
@@ -35,13 +38,15 @@ export const Register = ({user}:RegisterModel) => {
       ...registerData,
       [e.target.name]: {
         touched: true,
+        value:e.target.value,
         message: validateField(e.target.name, e.target.value),
       },
     });
   }
   const registerUser = (e:any) => {
     e.preventDefault()
-    axios.post('/users',{...registerData,userName:registerData.email})
+    const userData = {name:registerData.name.value,email:registerData.email.value,userName:registerData.email.value,password:registerData.password.value}
+    axios.post('/users',userData)
     navigate("/login");
   }
 

@@ -1,0 +1,149 @@
+nav {
+@keyframes profileModal {
+  from {transform: translateX(-100%);}
+  to {transform: translateX(0%);}
+}
+  .profileModal{
+    position: fixed;
+    width: 100%;
+    transform: translateX(-100%);
+    transition: all 0.3s ease-in-out;
+
+    &.open{
+      transform: translateX(0%); 
+    }
+   
+    top:0;
+    left: 0;
+    height: 100vh;
+    svg{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .overlay{
+      background: black;
+      opacity: 0.3;
+      width: 100%;
+      position: absolute;
+      height: 100%;
+      z-index: 1;
+      filter: blur(4px);
+    }
+    .content{
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: wheat;
+      width: 80%;
+      height: 100%;
+      z-index: 2;
+      position: absolute;
+      left: 0;
+    
+
+
+    }
+  }
+    transition: ease-in-out 0.3s;
+    background: orange;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    a {
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+      font-size: 25px;
+      margin: 10px;
+      &::hover {
+        color: #333;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+    svg,
+    img {
+      vertical-align: middle;
+    }
+
+    .auth {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .status {
+        width: 20px;
+        height: 20px;
+        background: rgb(12, 189, 12);
+        border-radius: 50%;
+        margin-right: 30px;
+        text-align: right;
+        /* position: absolute;
+          right: 130px;
+          top: 50%;
+          transform: translateY(-50%); */
+      }
+      .status.offline {
+        background: transparent;
+        border: 2px solid rgb(124, 122, 122);
+      }
+      .logout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .logout .user {
+         width: 38px;
+         text-align: center;
+         height:38px;
+         text-transform: uppercase;
+         background: wheat;
+         color: black;
+         border-radius: 50%;
+         font-weight: bold;
+         font-size: 23px;
+         line-height: 38px;
+      }
+     
+     
+      .leftLinks {
+        display: flex;
+      }
+      .burger {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+      }
+
+      @media only screen and (max-width: 1024px) {
+        .burger {
+          display: block;
+        }
+      
+        nav {
+          flex-direction: column;
+          justify-content: center;
+           display:none
+        }
+    
+        .leftLinks {
+          display: flex;
+          flex-direction: column;
+    
+        }
+    
+        nav {
+          .auth {
+            flex-direction: column;
+          }
+        }
+      }
+  }
