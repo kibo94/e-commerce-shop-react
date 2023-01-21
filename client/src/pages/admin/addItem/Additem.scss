@@ -1,0 +1,12 @@
+.AddItem{
+    text-align: center;
+    .form{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .addItemButton{
+        margin-top: 20px;
+    }
+}

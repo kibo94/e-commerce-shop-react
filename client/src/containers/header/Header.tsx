@@ -14,7 +14,7 @@ export const Header = ({
   admin,
   logoutUser,
   online,
-  cart
+  cart,
 }: HeaderProps) => {
   let headerColor = "orange";
   if (admin) {
@@ -30,95 +30,103 @@ export const Header = ({
     setIsMenuOpen(!isMenuOpen);
   };
   let headerClass = "";
-  console.log(isMenuOpen)
   if (isMenuOpen) {
     headerClass = "active";
   }
+
+  function shopingCart(cartClass:string) {
+    if (!admin)
+      return (
+        <Link
+          onClick={() => setIsMenuOpen(false)}
+          to="/cart"
+          className={`cartLink ${cartClass}`}
+        >
+          <span>{cart.length}</span>
+          <ShoppingCartIcon className="cart" />
+        </Link>
+      );
+    return null;
+  }
   return (
     <>
-    <header className={headerClass} style={{ backgroundColor: headerColor }}>
-      {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
-      <div className="burger" onClick={toggleBurgerMenu}>
-        <MenuIcon className="burgerIcon" />
-      </div>
-      <ScreenMode classNamee={"mobile"} />
-      <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink mobile">
-            <span>{cart.length}</span>
-            <ShoppingCartIcon className="cart" />
-          </Link>
-      <div className="border"></div>
-      <nav>
-        <div>
-          {admin ? (
+      <header className={headerClass} style={{ backgroundColor: headerColor }}>
+        {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
+        <div className="burger" onClick={toggleBurgerMenu}>
+          <MenuIcon className="burgerIcon" />
+        </div>
+        <ScreenMode classNamee={"mobile"} />
+        {shopingCart("mobile")}
+
+        <div className="border"></div>
+        <nav>
+          <div>
             <div className="leftLinks">
-              <Link onClick={() => setIsMenuOpen(false)} to="/addItem">
-                AddItem
-              </Link>
-              <Link onClick={() => setIsMenuOpen(false)} to="/items">
-                Items
-              </Link>
-            </div>
-          ) : (
-            <div className="leftLinks">
-              <Link onClick={() => setIsMenuOpen(false)} to="/home">
+              <Link onClick={() => setIsMenuOpen(false)} to="/">
                 Home
               </Link>
-              <Link onClick={() => setIsMenuOpen(false)} to="/fruits">
-                Fruits
-              </Link>
-              <Link onClick={() => setIsMenuOpen(false)} to="/vegetables">
-                Vegetables
-              </Link>
-              <Link onClick={() => setIsMenuOpen(false)} to="/laptops">
-                Laptops <LaptopIcon />
-              </Link>
-              <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                Contact
-              </Link>
+              {!admin ? (
+                <>
+                  <Link onClick={() => setIsMenuOpen(false)} to="/fruits">
+                    Fruits
+                  </Link>
+                  <Link onClick={() => setIsMenuOpen(false)} to="/vegetables">
+                    Vegetables
+                  </Link>
+                  <Link onClick={() => setIsMenuOpen(false)} to="/laptops">
+                    Laptops <LaptopIcon />
+                  </Link>
+                  <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
+                    Contact
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link onClick={() => setIsMenuOpen(false)} to="/addItem">
+                    AddItem
+                  </Link>
+
+                  <Link onClick={() => setIsMenuOpen(false)} to="/items">
+                    Items
+                  </Link>
+                </>
+              )}
             </div>
-          )}
-        </div>
-
-        <div className="auth">
-          {!authUser.userName ? (
-            <>
-              <Link onClick={() => setIsMenuOpen(false)} to="/login">
-                Login
-              </Link>
-              <Link onClick={() => setIsMenuOpen(false)} to="/register">
-                Register
-              </Link>
-            </>
-          ) : null}
-          <ScreenMode classNamee={"desktop"}/>
-          <Link onClick={() => setIsMenuOpen(false)} to="/cart" className="cartLink dekstop">
-            <span>{cart.length}</span>
-            <ShoppingCartIcon className="cart" />
-          </Link>
-         
-        </div>
-
-        {authUser.userName ? (
-          <div className="logout">
-            <h3>
-              <PersonIcon /> {authUser.userName}
-            </h3>
-            <button
-              onClick={() => {
-                logoutUser();
-                setIsMenuOpen(false);
-              }}
-            >
-              Logout
-            </button>
-
-            <UserStatus userStatus={online} />
           </div>
-        ) : null}
-      </nav>
-      {/* <h1>ITEMS{data?.data.length}</h1> */}
-    </header>
-   
+
+          <div className="auth">
+            {!authUser.userName ? (
+              <>
+                <Link onClick={() => setIsMenuOpen(false)} to="/login">
+                  Login
+                </Link>
+                <Link onClick={() => setIsMenuOpen(false)} to="/register">
+                  Register
+                </Link>
+              </>
+            ) : (
+              <div className="logout">
+                <h3>
+                  <PersonIcon /> {authUser.userName}
+                </h3>
+                <button
+                  onClick={() => {
+                    logoutUser();
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Logout
+                </button>
+
+                <UserStatus userStatus={online} />
+              </div>
+            )}
+            <ScreenMode classNamee={"desktop"} />
+            <>{shopingCart("desktop")}</>
+          </div>
+        </nav>
+        {/* <h1>ITEMS{data?.data.length}</h1> */}
+      </header>
     </>
   );
 };

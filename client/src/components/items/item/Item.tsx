@@ -6,16 +6,13 @@ import ItemCard from "../../cards/ItemCard";
 import Badge from "../../badge/Badge";
 import PriceBadge from "../../badge/PriceBadge";
 import { getImageSrc } from "../../../utils/utils";
-interface SingleItem  {
-  item:ItemModel,
-  deleteVegetable: (id:number) => void;
-  addToCart: (item:ItemModel) => void;
-  editeItem: (item:ItemModel) => void;
-  isAdmin:boolean
+interface SingleItem {
+  item: ItemModel;
+  deleteVegetable: (id: number) => void;
+  addToCart: (item: ItemModel) => void;
+  editeItem: (item: ItemModel) => void;
+  isAdmin: boolean;
 }
-
-
-
 
 export const Item = ({
   item,
@@ -23,39 +20,38 @@ export const Item = ({
   isAdmin,
   editeItem,
   addToCart,
-}:SingleItem) => {
-  const badgeInfo = {type:"red",text:""};
+}: SingleItem) => {
+  const badgeInfo = { type: "red", text: "" };
 
-if(item.quantity <= 0) {
-  console.log(item.quantity);
-  badgeInfo.type = "red";
-  badgeInfo.text = `No more on stack`
-}
-else {
-  badgeInfo.type = "green";
-  badgeInfo.text = `On stack`
-}
-console.log(item.quantity)
+  if (item.quantity <= 0) {
+    badgeInfo.type = "red";
+    badgeInfo.text = `No more on stack`;
+  } else {
+    badgeInfo.type = "green";
+    badgeInfo.text = `On stack`;
+  }
+
   return (
     <ItemCard>
-    <div className="name">{item.name}</div>
-    <Badge {...badgeInfo} />
-    <img src={getImageSrc(item.type)}/>
-        <div className="close">
-          {isAdmin ? <EditIcon onClick={() => editeItem(item)} /> : null}
-          {isAdmin ? (
-            <DeleteIcon onClick={() => deleteVegetable(item.id)}></DeleteIcon>
-          ) : null}
-        
-        </div>
-        {!isAdmin ? (
-            +item.quantity <= 0 ? (
-              <p className="noMore" >Check avelability </p>
-            ) : (
-              <button className="addToCart" onClick={() => addToCart(item)}>Add to Cart</button>
-            )
-          ) : null}
-          <PriceBadge price={item.price}/>
+      <div className="name">{item.name}</div>
+      <Badge {...badgeInfo} />
+      <img src={getImageSrc(item.type)} />
+      <div className="close">
+        {isAdmin ? <EditIcon onClick={() => editeItem(item)} /> : null}
+        {isAdmin ? (
+          <DeleteIcon onClick={() => deleteVegetable(item.id)}></DeleteIcon>
+        ) : null}
+      </div>
+      {!isAdmin ? (
+        +item.quantity <= 0 ? (
+          <p className="noMore">Check avelability </p>
+        ) : (
+          <button className="addToCart" onClick={() => addToCart(item)}>
+            Add to Cart
+          </button>
+        )
+      ) : null}
+      <PriceBadge price={item.price} />
     </ItemCard>
   );
 };

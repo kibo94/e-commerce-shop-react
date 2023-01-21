@@ -35,9 +35,15 @@ export const deleteItemfromList = (items: ItemModel[], id: number) =>
 
 export const parseObject = (obj: any) => JSON.parse(obj);
 
-export const checkAllFieldsAreValid = (fields: any) => {
+export const checkAllFieldsEmpty= (fields: any) => {
   const valuesToArray = Object.values(fields);
-  console.log(fields);
+  const validFrom = valuesToArray.every(
+    (value: any) => value && value.length >= 0
+  );
+  return validFrom;
+};
+export const checkAllFieldsAreValid = (fields: any) => {
+  const valuesToArray = Object.values(fields);;
   const validFrom = valuesToArray.every(
     (value: any) => value.message.length <= 0 && value.touched
   );
@@ -109,6 +115,15 @@ export const getImageSrc = (type:string) =>  {
     }
     case "vegetables": {
       return "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    }
+    case "fruits-bck": {
+      return "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+    }
+    case "laptops-bck": {
+      return "https://images.unsplash.com/photo-1602080858428-57174f9431cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1851&q=80"
+    }
+    case "vegetables-bck": {
+     return "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
     }
     default  :{
       return "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"

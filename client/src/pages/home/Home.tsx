@@ -4,10 +4,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router";
 import { Items } from "../../components/items/Items";
 import RecursiveMenu from "../../components/recursiveMenu/RecursiveMenu";
+import "./Home.scss"
 interface H1Styled {
   primary: boolean;
   secondory?: string;
 }
+
 
 export default function Home(props: any) {
   const navigate = useNavigate();
@@ -24,19 +26,7 @@ export default function Home(props: any) {
     }
   `;
 
- 
-  
 
-
-  // 👆 We destructure the array as a return of the useState function into two value
-  
-  // console.log(counter()); // 👈 returns 0 which it's the value of counter()
-
-
-
-  // console.log(setMyState1)
-
-  let level = 0;
   useEffect(() => {
     if (!props.user) {
       // navigate("/login");
@@ -82,7 +72,6 @@ export default function Home(props: any) {
         return item;
       }
     });
-    console.log(res);
     return res;
   };
 
@@ -100,16 +89,13 @@ export default function Home(props: any) {
   };
 
   return (
-    <div className="Home">
-      <button onClick={() => setTitlePrimary((prev) => !prev)}>
-        Toggle color of title
-      </button>
-      <Title primary={titlePrimary} secondory="red">
-        Home
-        <CloseIcon />
-      </Title>
+    <div className="Home container-top">
+      <div className="heroImg">
+        <img src="https://plus.unsplash.com/premium_photo-1670462145715-c32d0c91e81b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1600&q=80"
+     />
+      </div>
+ 
       <div ref={divRef}></div>
-
       {/* <RecursiveMenu /> */}
     </div>
   );

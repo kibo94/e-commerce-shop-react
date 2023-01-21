@@ -33,7 +33,6 @@ export function Contact() {
    
     emailjs.sendForm(serviceId, templatId, form.current, publicKey).then(
       (result) => {
-        console.log(result)
       },
       (error) => {}
     );

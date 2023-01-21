@@ -17,27 +17,29 @@
 
 /* add itmem */
 .dropdown {
-    position: relative;
-    @media(max-width:1068px) {
-        top: 80px;
-        background: #333;
-    }
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .dropDownButton{
+   margin: 20px 0;
+  }
   }
   
   .menu {
-    position: absolute;
-  
+    
     list-style-type: none;
-    margin: 5px 0;
+    margin: 20px 0;
     padding: 0;
   
     border: 1px solid grey;
-    width: 150px;
+    width: 300px;
   }
   
   .menu > li {
     margin: 0;
-  
+    border: 2px solid black;
     background-color: white;
   }
   

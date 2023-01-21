@@ -6,19 +6,21 @@ import EditItemModal from "../modals/EditItemModal";
 import { Item } from "./item/Item";
 import axios from "axios";
 import { ItemModel } from "../../models/Item";
-import { deleteItemfromList, updateListOfItems } from "../../utils/utils";
+import { deleteItemfromList, getImageSrc, updateListOfItems } from "../../utils/utils";
 import "./Items.scss"
 
 interface ItemsModel {
   type: string;
   isAdmin: boolean;
-  addToCart?: (item:ItemModel) => void
+  addToCart?: (item:ItemModel) => void,
+  products:any
 }
-export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
+export const Items = ({ type, isAdmin ,addToCart,products = []}: ItemsModel) => {
   const [query, setQuery] = useState("");
-  const [items, setItems] = useFetchItems(type);
+  const [items, setItems] = useFetchItems(products,type);
   const { value } = useTheme();
   const [isEditModaOpen, setIsEditModaOpen] = useState(false);
+
 
   const [singleItem, setSingleItem] = useState<ItemModel>({
     id: 0,
@@ -57,7 +59,6 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
   const onUpdateItemHandler = async () => {
     try {
       if (singleItem) {
-        console.log(updatedItem)
         await axios.put(`/products/${singleItem.id}`, {
           ...singleItem,
           ...updatedItem
@@ -110,7 +111,7 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
   const itemsClass = `ItemList ${value}`;
 
   return (
-    <>
+    <div className="container-top">
       {isEditModaOpen ? (
         <EditItemModal
           item={updatedItem}
@@ -120,7 +121,9 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
         />
       ) : null}
     
-      <h1 className="itemHeading">{type.toUpperCase()}</h1>
+      <div className="itemHeading">
+      <h1>{type.toUpperCase()}</h1>
+      <img src={getImageSrc(`${type}-bck`)}/></div>
       {items && items.length > 0 ? (
         <FilterItems  filterFruit={filterFruitHandler} type={type} />
       ) : null}
@@ -144,35 +147,22 @@ export const Items = ({ type, isAdmin ,addToCart}: ItemsModel) => {
       )}
 
 
-    </>
+    </div>
   );
 };
 
-const useFetchItems = (type: string) => {
+const useFetchItems = (products:ItemModel[],type:string) => {
   const [items, setItems] = useState<ItemModel[]>([]);
-  const fetchItems = useCallback(async () => {
-    const data = await axios.get(`/products`);
-    setItems(data.data.filter((item:ItemModel) => item.type == type));
-  }, [type]);
-  useEffect(() => {
-    setItems([]);
-    fetchItems();
-  }, [type, fetchItems]);
+  // const fetchItems = useCallback(async () => {
+  //   const data = await axios.get(`/products`);
+  //   setItems(data.data.filter((item:ItemModel) => item.type == type));
+  // }, [type]);
+  // useEffect(() => {
+  //   setItems([]);
+  //   fetchItems();
+  // }, [type, fetchItems]);
+   useEffect(() => {
+    setItems(products.filter((item:ItemModel) => item.type == type))
+   },[type])
   return [items, setItems] as const;
 };
-// const useFetchItems2 =   (type: string) => {
-//   // const [items, setItems] = useState<ItemModel[]>([]);
-//   const fetchItems = useCallback( async () => {
-//     const data = await axios.get(`/${type}`);
-
-//     return data;
-//     // setItems(data.data);
-//   }, [type]);
-//   // useEffect(() => {
-//   //   // setItems([]);
-//   //   fetchItems();
-  
-//   // }, [type, fetchItems]);
-
-//   return fetchItems;
-// };

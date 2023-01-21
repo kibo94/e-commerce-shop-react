@@ -45,6 +45,7 @@ function App() {
   const [online, setOnline] = useUserTimeOut(user);
   const [cart, setCart] = useState<ItemModel[]>([]);
   const queryClient = new QueryClient();
+  const [products,setProducts] = useState([])
   useEffect(() => {
     const mode = getMode(value);
     if (mode === "dark") {
@@ -55,13 +56,23 @@ function App() {
   }, [value]);
   useEffect(() => {
     setOnline(parseObject(authUser));
-    
+
     if (parseObject(authUser).userName) {
       setAdmin(isAdmin(parseObject(authUser)));
     } else {
       setAdmin(false);
     }
   }, [authUser, admin]);
+
+  useEffect(() => {
+    fetchProducts()
+  },[])
+
+  async function fetchProducts() {
+    const data = await axios.get(`/products`);
+    setProducts(data.data)
+  }
+
 
   // useEffect(() => {
   //   if (stopWatchPlay) {
@@ -93,74 +104,66 @@ function App() {
   };
 
   const loginUser = (username: string, password: string, id: any) => {
-    console.log(id);
+
     setAuthUser(
       JSON.stringify({
         userName: username,
         password: password,
         id,
       })
-
     );
     navigate("/home");
   };
   const logoutUserHandler = async (user: User) => {
-
     setAuthUser(false);
     setUser(false);
     navigate("/login");
-
   };
   function addToCart(item: ItemModel) {
-    if(cart.length == 0) {
-      setCart([...cart,{...item,quantity:1}]);
-    }
-    else {
-      const alreadyExists = cart.find(c => c.id == item.id)
-      if(alreadyExists) {
+    if (cart.length == 0) {
+      setCart([...cart, { ...item, quantity: 1 }]);
+    } else {
+      const alreadyExists = cart.find((c) => c.id == item.id);
+      if (alreadyExists) {
         alreadyExists.quantity = alreadyExists.quantity + 1;
         const updatedItems = updateListOfItems(cart, alreadyExists);
         setCart(updatedItems);
-      }
-      else {
-        setCart([...cart,{...item,quantity:1}]);
+      } else {
+        setCart([...cart, { ...item, quantity: 1 }]);
       }
     }
-    toast.success("Cart item has been added")
+    toast.success("Cart item has been added");
   }
-    
-  function updateItemQuantityHandler(item: ItemModel,type:string) {
+
+  function updateItemQuantityHandler(item: ItemModel, type: string) {
     const newItem = { ...item };
-    newItem.quantity =  type === "add" ? newItem.quantity + 1 : newItem.quantity -1
+    newItem.quantity =
+      type === "add" ? newItem.quantity + 1 : newItem.quantity - 1;
     const updatedItems = updateListOfItems(cart, newItem);
     setCart(updatedItems);
- 
   }
   function deleteItemHandler(id: number) {
     setCart(cart.filter((cart) => cart.id !== id));
-    toast.success("Cart item has been removed")
+    toast.success("Cart item has been removed");
   }
   const appClass = `App ${getMode(value)}`;
-async function finishShopingHandler () {
-  const items = await (await axios("/products")).data;
-   items.map( async (item:ItemModel) =>  {
-    const findedItem = cart.find(cartItem => cartItem.id === item.id)
-    if(findedItem) {
-      item.quantity = +item.quantity - +findedItem?.quantity;
-      await axios.put(`/products/${item.id}`,item)
-    
-    }
-  
-  })
+  async function finishShopingHandler() {
+    const items = await (await axios("/products")).data;
+    items.map(async (item: ItemModel) => {
+      const findedItem = cart.find((cartItem) => cartItem.id === item.id);
+      if (findedItem) {
+        item.quantity = +item.quantity - +findedItem?.quantity;
+        await axios.put(`/products/${item.id}`, item);
+      }
+    });
 
-
-  setCart([])
-  toast.success("Shoping has been finished")
-}
-let cartWithQuantity:ItemModel[] = [];
-if(cart.length > 0) {
-  cartWithQuantity = cart.filter(c => c.quantity > 0)
-}
+    setCart([]);
+    toast.success("Shoping has been finished");
+  }
+  let cartWithQuantity: ItemModel[] = [];
+  if (cart.length > 0) {
+    cartWithQuantity = cart.filter((c) => c.quantity > 0);
+  }
   return (
     <div className={appClass} onClick={backStatusOnline}>
       <QueryClientProvider client={queryClient}>
@@ -171,7 +174,7 @@ if(cart.length > 0) {
         {/* <button onClick={() => setMyUser(myUser==="red" ? "blue" : "red")}>Change user</button> */}
         {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
         <Header
-        cart={cartWithQuantity}
+          cart={cartWithQuantity}
           admin={admin}
           authUser={parseObject(authUser)}
           logoutUser={() => logoutUserHandler(parseObject(authUser))}
@@ -179,20 +182,20 @@ if(cart.length > 0) {
         />
 
         <Routes>
-          <Route path="/home" element={<Home user={parseObject(authUser)} />} />
+          <Route path="/" element={<Home user={parseObject(authUser)} />} />
 
           {itemsRoutes.map((item) => {
             return (
               <Route
                 path={`/${item}`}
                 element={
-                  <Items type={item} isAdmin={admin} addToCart={addToCart} />
+                  <Items key={item} type={item} isAdmin={admin} addToCart={addToCart} products={products} />
                 }
               />
             );
           })}
           <Route path="/admin" element={<Admin isAdmin={admin} />} />
-          <Route path="/items" element={<AdminItems isAdmin={admin} />} />
+          <Route path="/items" element={<AdminItems isAdmin={admin} products={products}  />} />
           {<Route path="/addItem" element={<AddItem admin={admin} />} />}
           <Route
             path="/login"
@@ -204,8 +207,8 @@ if(cart.length > 0) {
             path="/cart"
             element={
               <Cart
-              finishShoping={finishShopingHandler}
-              
+                admin={admin}
+                finishShoping={finishShopingHandler}
                 cart={cartWithQuantity}
                 deleteItem={deleteItemHandler}
                 updateItemQuantity={updateItemQuantityHandler}

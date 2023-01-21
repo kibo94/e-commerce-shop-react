@@ -8,8 +8,9 @@ import { Items } from '../../../components/items/Items';
 import "../Admin.scss"
 interface AdminItemsProps {
   isAdmin:boolean;
+  products:any
 }
-const AdminItems = ({isAdmin} : AdminItemsProps) => {
+const AdminItems = ({isAdmin,products} : AdminItemsProps) => {
   const [itemType, setItemType] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     const itemType = event.target.value as string;
@@ -38,7 +39,7 @@ const AdminItems = ({isAdmin} : AdminItemsProps) => {
   </Select>
 </FormControl>
 </Box>
-{itemType ? <Items type={itemType} isAdmin={isAdmin}/> : null}
+{itemType ? <Items type={itemType} isAdmin={isAdmin} products={products}/> : null}
 </>
 
   )

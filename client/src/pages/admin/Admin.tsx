@@ -13,7 +13,6 @@ const Admin = ({admin}:any) => {
       navigate("/admin");
     }
      axios.get('/logedUsers').then((users:any) => {
-      console.log(users)
           setLogedUsers(users.data)
      })
   },[])

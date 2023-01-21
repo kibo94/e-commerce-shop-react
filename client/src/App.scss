@@ -82,7 +82,10 @@
 .form form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
+  input{
+    width: 250px;
+  }
 }
 .form input,textarea{
   padding: 19px 20px;

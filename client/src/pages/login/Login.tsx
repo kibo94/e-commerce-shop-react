@@ -46,6 +46,7 @@ export const Login = ({ login, user }: LoginModel) => {
         passwordeRef.current!.value,
         findedUser?.id
       );
+      
       await axios.post("/logedUsers", findedUser);
       navigate("/home");
     } else {
@@ -67,7 +68,6 @@ export const Login = ({ login, user }: LoginModel) => {
     e.preventDefault();
     await loginUser();
   };
-  console.log(loginData);
   return (
     <div className="login form">
       <form onSubmit={onLoginSubmit}>

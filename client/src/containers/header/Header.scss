@@ -2,9 +2,9 @@ header {
 
   cursor: pointer;
   border-bottom: 2px solid wheat;
-
+ 
   height: 80px;
-  position: fixed;
+
   width: 100%;
   p {
     position: absolute;
@@ -54,6 +54,7 @@ header {
       display: none;
     }
     @media only screen and (max-width: 1024px) {
+      position: fixed;
       margin: 0;
       top: 30px;
       right: 30px;
