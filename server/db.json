@@ -7,21 +7,8 @@
       "password": "1234",
       "userName": "bojanb106@gmail.com",
       "id": 3
-    },
-    {
-      "name": "Marko Markovic",
-      "email": "mare@gmail.com",
-      "password": "123",
-      "userName": "mare@gmail.com",
-      "id": 4
-    },
-    {
-      "name": "Bojan",
-      "email": "jankec123@gamil.com",
-      "password": "1234",
-      "userName": "jankec123@gamil.com",
-      "id": 5
     }
+   
   ],
   "products": [
     {
