@@ -160,7 +160,7 @@ function App() {
           online={online}
         />
         <Routes>
-          <Route path="/" element={<Home user={parseObject(authUser)} />} />
+          <Route path="/" element={<Home user={parseObject(authUser)} products={products} />} />
 
           {itemsRoutes.map((item) => {
             return (
