@@ -1,27 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeContextProvider } from './contexts/ThemeContextProvider';
-import { PopupContextProvider } from './contexts/PopupContext';
-import axios from 'axios';
-axios.defaults.baseURL = 'https://e-commerce-api-8p0f.onrender.com';
+import { ThemeContextProvider } from "./contexts/ThemeContextProvider";
+import { PopupContextProvider } from "./contexts/PopupContext";
+import axios from "axios";
+import { SideBarContextProvider } from "./contexts/SideBarContext";
+axios.defaults.baseURL = "https://e-commerce-api-8p0f.onrender.com";
 // axios.defaults.baseURL = "http://localhost:4000"
 ReactDOM.render(
+  <BrowserRouter>
+    <SideBarContextProvider>
+      <ThemeContextProvider>
+        <PopupContextProvider>
+          <App />
+        </PopupContextProvider>
+      </ThemeContextProvider>
+    </SideBarContextProvider>
+  </BrowserRouter>,
 
-    <BrowserRouter>
-    <ThemeContextProvider>
-    <PopupContextProvider>
-    <App />
-    </PopupContextProvider>
-    </ThemeContextProvider>
-  
-    </BrowserRouter>
-
- ,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

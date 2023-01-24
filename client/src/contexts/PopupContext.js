@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 const PopupContext = React.createContext(null);
+const SideBarContext = React.createContext(null);
 const defaultPopUp = {
   display: false,
   type: "default",
@@ -8,6 +9,8 @@ const defaultPopUp = {
   top:300
 
 };
+
+
 const usePopUp =  () =>  {
   const [popUp, setPopUp] = React.useContext(PopupContext);
   
@@ -24,6 +27,8 @@ const usePopUp =  () =>  {
 
   return { popUp: popUp, onChange: handlePopUp , onClose:handleClose};
 };
+
+
 const PopupContextProvider = ({ children }) => {
   const [popUp, setPopUp] = useState(defaultPopUp);
   return (

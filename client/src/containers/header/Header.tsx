@@ -2,14 +2,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ScreenMode from "../../components/screenMode/ScreenMode";
 
-
-
 import { HeaderProps } from "../../models/HeaderProps";
 import axios from "axios";
 import MenuIcon from "@mui/icons-material/Menu";
 import "./Header.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Nav from "../../components/nav/Nav";
+import { useSideBar } from "../../contexts/SideBarContext";
+import SideBar from "../../components/sideBar/SideBar";
+
 export const Header = ({
   authUser,
   admin,
@@ -17,6 +18,7 @@ export const Header = ({
   online,
   cart,
 }: HeaderProps) => {
+  const { toggle, isSideBarOpen } = useSideBar();
   let headerColor = "orange";
   if (admin) {
     headerColor = "blue";
@@ -29,13 +31,14 @@ export const Header = ({
   // if(isLoading) {}
   const toggleBurgerMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    // toggle(<SideBarNavigation  authUser={authUser} admin={admin}  logoutUser={logoutUser} />,!isSideBarOpen.open  );
   };
   let headerClass = "";
   if (isMenuOpen) {
     headerClass = "active";
   }
 
-  function shopingCart(cartClass:string) {
+  function shopingCart(cartClass: string) {
     if (!admin)
       return (
         <Link
@@ -51,6 +54,8 @@ export const Header = ({
   }
   return (
     <>
+       <SideBar isOpenProfleModal={isSideBarOpen} />
+       
       <header className={headerClass} style={{ backgroundColor: headerColor }}>
         {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
         <div className="burger" onClick={toggleBurgerMenu}>
@@ -60,11 +65,16 @@ export const Header = ({
         {shopingCart("mobile")}
 
         <div className="border"></div>
-        <Nav admin={admin} setIsMenuOpen={setIsMenuOpen} authUser={authUser} shopingCart={shopingCart} logoutUser={logoutUser}/>
-        
+        <Nav
+          admin={admin}
+          setIsMenuOpen={setIsMenuOpen}
+          authUser={authUser}
+          shopingCart={shopingCart}
+          logoutUser={logoutUser}
+        />
+
         {/* <h1>ITEMS{data?.data.length}</h1> */}
       </header>
     </>
   );
 };
-

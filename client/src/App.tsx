@@ -32,9 +32,6 @@ import { ItemModel } from "./models/Item";
 function App() {
   const { popUp } = usePopUp();
 
-  // const [seconds, setSeconds] = useState(0);
-  // const [minutes, setMinutes] = useState(0);
-  // const [miliseconds, setMiliSeconds] = useState(0);
   const [stopWatchPlay, setStapWatchPlay] = useState(true);
   const [authUser, setAuthUser] = useLocalStorageHook("auth", false);
   const [user, setUser] = useState(parseObject(authUser));
@@ -45,7 +42,7 @@ function App() {
   const [online, setOnline] = useUserTimeOut(user);
   const [cart, setCart] = useState<ItemModel[]>([]);
   const queryClient = new QueryClient();
-  const [products,setProducts] = useState([])
+  const [products, setProducts] = useState<ItemModel[]>([]);
   useEffect(() => {
     const mode = getMode(value);
     if (mode === "dark") {
@@ -65,36 +62,16 @@ function App() {
   }, [authUser, admin]);
 
   useEffect(() => {
-    fetchProducts()
-  },[])
+    fetchProducts();
+  }, []);
 
+  function updateProductsHandler(product:ItemModel) {
+    setProducts([...products,product])
+  }
   async function fetchProducts() {
     const data = await axios.get(`/products`);
-    setProducts(data.data)
+    setProducts(data.data);
   }
-
-
-  // useEffect(() => {
-  //   if (stopWatchPlay) {
-  //     let interval2 = setInterval(() => {
-  //       // setMiliSeconds(miliseconds >= 100 ? 0 : miliseconds + 1);
-  //     }, 10);
-  //     return () => {
-  //       // clearInterval(interval2);
-  //     };
-  //   }
-  // }, [miliseconds, stopWatchPlay]);
-  // useEffect(() => {
-  //   if (stopWatchPlay) {
-  //     let interval = setInterval(() => {
-  //       // setMinutes(seconds >= 60 ? minutes + 1 : minutes)
-  //       // setSeconds(seconds >= 60 ? 0 : seconds + 1);
-  //     }, 1000);
-  //     return () => {
-  //       // clearInterval(interval);
-  //     };
-  //   }
-  // }, [stopWatchPlay, seconds, minutes]);
 
   const backStatusOnline = () => {
     if (user) {
@@ -103,17 +80,20 @@ function App() {
     setStapWatchPlay(!stopWatchPlay);
   };
 
-  const loginUser = (username: string, password: string, id: any,name:string) => {
-   const user = {
-    userName: username,
-    password: password,
-    name:name,
-    id,
-   }
-    setAuthUser(
-      JSON.stringify(user)
-    );
-    setUser(user)
+  const loginUser = (
+    username: string,
+    password: string,
+    id: any,
+    name: string
+  ) => {
+    const user = {
+      userName: username,
+      password: password,
+      name: name,
+      id,
+    };
+    setAuthUser(JSON.stringify(user));
+    setUser(user);
 
     navigate("/home");
   };
@@ -171,11 +151,7 @@ function App() {
     <div className={appClass} onClick={backStatusOnline}>
       <QueryClientProvider client={queryClient}>
         {popUp.display ? <Popup /> : null}
-        {/* <MemoTeste myUser={myUser}/> */}
         <ToastContainer />
-
-        {/* <button onClick={() => setMyUser(myUser==="red" ? "blue" : "red")}>Change user</button> */}
-        {/* <StopWatch seconds={seconds} miliseconds={miliseconds} minutes={minutes} /> */}
         <Header
           cart={cartWithQuantity}
           admin={admin}
@@ -183,7 +159,6 @@ function App() {
           logoutUser={() => logoutUserHandler(parseObject(authUser))}
           online={online}
         />
-
         <Routes>
           <Route path="/" element={<Home user={parseObject(authUser)} />} />
 
@@ -192,14 +167,23 @@ function App() {
               <Route
                 path={`/${item}`}
                 element={
-                  <Items key={item} type={item} isAdmin={admin} addToCart={addToCart} products={products} />
+                  <Items
+                    key={item}
+                    type={item}
+                    isAdmin={admin}
+                    addToCart={addToCart}
+                    products={products}
+                  />
                 }
               />
             );
           })}
           <Route path="/admin" element={<Admin isAdmin={admin} />} />
-          <Route path="/items" element={<AdminItems isAdmin={admin} products={products}  />} />
-          {<Route path="/addItem" element={<AddItem admin={admin} />} />}
+          <Route
+            path="/items"
+            element={<AdminItems isAdmin={admin} products={products} />}
+          />
+          {<Route path="/addItem" element={<AddItem admin={admin}  updateProducts={updateProductsHandler} />} />}
           <Route
             path="/login"
             element={<Login login={loginUser} user={parseObject(authUser)} />}

@@ -5,14 +5,14 @@ import { usePopUp } from "../../../contexts/PopupContext";
 import axios from "axios";
 import "./AddItem";
 import { checkAllFieldsEmpty } from "../../../utils/utils";
+import { ItemModel } from "../../../models/Item";
 interface AddItemProps {
   admin: boolean;
+  updateProducts:(product:ItemModel) => void;
 }
-export const AddItem = ({ admin }: AddItemProps) => {
+export const AddItem = ({ admin , updateProducts}: AddItemProps) => {
   const { onChange, popUp } = usePopUp();
   const [open, setOpen] = React.useState(false);
-  const [item, setItem] = useState("");
-  const [plusMinus, setPLusMinus] = useState(1);
   const [itemData, setItemData] = useState({
     name: "",
     price: "",
@@ -41,16 +41,18 @@ export const AddItem = ({ admin }: AddItemProps) => {
 
   const addItemHanlder = async () => {
     if (itemRef.current.value.length > 2) {
-      const createdItem = {
+      const createdItem:ItemModel = {
         id: Math.random(),
         author: "admin",
-        ...itemData
+        ...itemData,
+        price:+itemData.price
         
       };
       try {
         await axios.post(`/products`, createdItem);
 
         // toast.success("Item sucessefuly added")
+        updateProducts(createdItem)
         onChange({
           ...popUp,
           type: "success",
@@ -74,7 +76,6 @@ export const AddItem = ({ admin }: AddItemProps) => {
   const onChangePrice = (e: any) => {
     setItemData({ ...itemData, [e.target.name]: e.target.value });
   };
-  const haveData = 0;
   return (
     <div className="AddItem container-top">
       {checkAllFieldsEmpty(itemData) ? (

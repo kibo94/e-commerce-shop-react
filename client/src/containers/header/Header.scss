@@ -107,3 +107,49 @@ header {
     }
   }
 }
+
+
+.profileModal{
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  transform: translateX(-100%);
+  transition: all 0.3s ease-in-out;
+
+  &.open{
+    transform: translateX(0%); 
+  }
+ 
+  top:0;
+  left: 0;
+  height: 100vh;
+  svg{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+  .overlay{
+    background: black;
+    opacity: 0.3;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    filter: blur(4px);
+  }
+  .content{
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: wheat;
+    width: 80%;
+    height: 100%;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+  
+
+
+  }
+}

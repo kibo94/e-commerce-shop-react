@@ -1,27 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import LaptopIcon from "@mui/icons-material/Laptop";
 import ScreenMode from "../screenMode/ScreenMode";
-import ClearIcon from "@mui/icons-material/Clear";
+
 import "./Nav.scss";
 import Profile from "../profile/Profile";
+import SideBar from "../sideBar/SideBar";
+import { useSideBar } from "../../contexts/SideBarContext";
 function Nav({ admin, setIsMenuOpen, authUser, shopingCart, logoutUser }: any) {
+  const { toggle, isSideBarOpen } = useSideBar();
+
   const [isOpenProfleModal, setIsOpenProfileModal] = useState(false);
-  function toggleProfileModal() {
-    setIsOpenProfileModal(!isOpenProfleModal);
-  }
-  let profilModalClass = "profileModal"
-  if(isOpenProfleModal){
-    profilModalClass = "profileModal open"
-  }
-  else {
-    profilModalClass = "profileModal"
-  }
+  // function toggleProfileModal() {
+  //   setIsOpenProfileModal(!isOpenProfleModal);
+  // }
+
+  // useEffect(() => {
+
+  // },)
+ 
   return (
     <nav>
-      
-        <div className={profilModalClass}>
+      {/* <div className={profilModalClass}>
           <div className="overlay" onClick={() => setIsOpenProfileModal(!isOpenProfleModal)}></div>
           <div className="content" >
           <ClearIcon
@@ -29,13 +30,17 @@ function Nav({ admin, setIsMenuOpen, authUser, shopingCart, logoutUser }: any) {
           />
           <Profile user={authUser}/>
           </div>
-        </div>
+        </div> */}
+     
    
+    
+
       <div>
         <div className="leftLinks">
           <Link onClick={() => setIsMenuOpen(false)} to="/">
             Home
           </Link>
+          
           {!admin ? (
             <>
               <Link onClick={() => setIsMenuOpen(false)} to="/fruits">
@@ -77,7 +82,7 @@ function Nav({ admin, setIsMenuOpen, authUser, shopingCart, logoutUser }: any) {
           </>
         ) : (
           <div className="logout">
-            <div className="user" onClick={toggleProfileModal}>
+            <div className="user" onClick={() => toggle(<Profile user={authUser}/>,true)}>
               {authUser.userName[0]}
               {/* <PersonIcon /> {authUser.userName} */}
             </div>
