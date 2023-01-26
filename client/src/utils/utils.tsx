@@ -105,9 +105,10 @@ export function validateEmail(email: string) {
   return re.test(email);
 }
 
-export const  getTopThreeItemsFromSpecificType = (type:string,products:ItemModel[]) =>{
+export const  getTopThreeItemsFromSpecificType = (type:string,products:ItemModel[],length:number) =>{
   const specificTypeProducts = products.filter(product => product.type === type);
-  return specificTypeProducts.slice(0,3)
+  console.log(length);
+  return specificTypeProducts.slice(0,length)
 }
 
 export const getImageSrc = (type:string) =>  {

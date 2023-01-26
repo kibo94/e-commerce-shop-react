@@ -3,19 +3,18 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import { ItemModel } from "../../models/Item";
 import { getImageSrc } from "../../utils/utils";
+import { Link } from "react-router-dom";
 
 interface SliderProps {
   products: ItemModel[];
 }
 function Slider({ products }: SliderProps) {
-  console.log(products);
   const [currentSlide, setCurrentSlide] = React.useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
-    
-    slides: {
-      perView: 2,
+    slides:{
+      perView:2 
     },
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel);
@@ -24,18 +23,24 @@ function Slider({ products }: SliderProps) {
       setLoaded(true);
     },
   });
+  if(products.length === 0) {
+    return <h1>No Products</h1>
+
+  }
   return (
     <>
+
       <div className="navigation-wrapper">
         <div ref={sliderRef} className="keen-slider slider">
-          {products.length > 0
-            ? products.map((product) => (
+          {
+             products.map((product) => (
                 <div className="keen-slider__slide number-slide1 slide">
                   <h1>{product.name}</h1>
                   <img src={getImageSrc(product.type)} />
+                  <Link  to={`/singleProduct#${product.id}`}>Details</Link>
                 </div>
               ))
-            : null}
+          }
         </div>
         {loaded && instanceRef.current && (
           <>
@@ -53,16 +58,16 @@ function Slider({ products }: SliderProps) {
               }
               disabled={
                 currentSlide ===
-                instanceRef.current.track.details.slides.length - 1
+                instanceRef.current.track.details?.slides.length - 1
               }
             />
           </>
         )}
       </div>
-      {loaded && instanceRef.current && (
+      {loaded && instanceRef?.current && (
         <div className="dots">
           {[
-            ...Array(instanceRef.current.track.details.slides.length).keys(),
+            ...Array(instanceRef.current.track.details?.slides.length - 1).keys(),
           ].map((idx) => {
             return (
               <button

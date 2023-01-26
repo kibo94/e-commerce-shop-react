@@ -17,6 +17,10 @@
         margin: 20px 0;
         border: 2px solid beige;
         .slide{
+          a{
+            position: absolute;
+            bottom: 20px;
+          }
             height: 400px;
             position: relative;
             h1{

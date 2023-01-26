@@ -6,6 +6,7 @@ import ItemCard from "../../cards/ItemCard";
 import Badge from "../../badge/Badge";
 import PriceBadge from "../../badge/PriceBadge";
 import { getImageSrc } from "../../../utils/utils";
+import { Link } from "react-router-dom";
 interface SingleItem {
   item: ItemModel;
   deleteVegetable: (id: number) => void;
@@ -41,6 +42,7 @@ export const Item = ({
         {isAdmin ? (
           <DeleteIcon onClick={() => deleteVegetable(item.id)}></DeleteIcon>
         ) : null}
+        <Link to={"/singleProduct#" + item.id}>Details</Link>
       </div>
       {!isAdmin ? (
         +item.quantity <= 0 ? (

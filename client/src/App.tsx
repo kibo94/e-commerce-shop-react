@@ -28,6 +28,7 @@ import axios from "axios";
 import Admin from "./pages/admin/Admin";
 import Cart from "./pages/cart/Cart";
 import { ItemModel } from "./models/Item";
+import SingleProduct from "./pages/singleProduct/SingleProduct";
 
 function App() {
   const { popUp } = usePopUp();
@@ -63,6 +64,7 @@ function App() {
 
   useEffect(() => {
     fetchProducts();
+    console.log(products)
   }, []);
 
   function updateProductsHandler(product:ItemModel) {
@@ -70,6 +72,7 @@ function App() {
   }
   async function fetchProducts() {
     const data = await axios.get(`/products`);
+
     setProducts(data.data);
   }
 
@@ -190,6 +193,7 @@ function App() {
           />
           <Route path="/register" element={<Register user={authUser} />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/singleProduct" element={<SingleProduct products={products}/>}/>
           <Route
             path="/cart"
             element={

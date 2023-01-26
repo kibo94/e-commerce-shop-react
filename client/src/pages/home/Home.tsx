@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
-import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router";
 import { Items } from "../../components/items/Items";
-import RecursiveMenu from "../../components/recursiveMenu/RecursiveMenu";
+// import RecursiveMenu from "../../components/recursiveMenu/RecursiveMenu";
 
 import "./Home.scss";
 import Slider from "../../components/slider/Slider";
@@ -16,16 +15,16 @@ interface H1Styled {
 export default function Home(props: any) {
   const navigate = useNavigate();
 
-  const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: ${(props: H1Styled) => (props.primary ? "white" : "black")};
-    svg {
-      color: ${(props: H1Styled) => props.secondory};
-      margin-left: 10px;
-      vertical-align: middle;
-    }
-  `;
+  // const Title = styled.h1`
+  //   font-size: 1.5em;
+  //   text-align: center;
+  //   color: ${(props: H1Styled) => (props.primary ? "white" : "black")};
+  //   svg {
+  //     color: ${(props: H1Styled) => props.secondory};
+  //     margin-left: 10px;
+  //     vertical-align: middle;
+  //   }
+  // `;
 
   useEffect(() => {
     if (!props.user) {
@@ -61,33 +60,7 @@ export default function Home(props: any) {
       children: [],
     },
   ];
-  const serachTerm = "grandGrand2";
-  // const arr = [];
-  const allCats = (items: any) => {
-    let res = items.filter((item: any) => {
-      if (item.children && item.children.length > 0) {
-        allCats(item.children);
-      }
-      if (item.name.includes(serachTerm)) {
-        return item;
-      }
-    });
-    return res;
-  };
-
-  allCats(data);
-  const filterByLabel = (array: any, searchTerm: string) => {
-    return array.reduce((prev: any, curr: any) => {
-      const children = curr.children
-        ? filterByLabel(curr.children, searchTerm)
-        : undefined;
-
-      return curr.name.includes(searchTerm) || children?.length > 0
-        ? [...prev, { ...curr, children }]
-        : prev;
-    }, []);
-  };
-
+ 
   return (
     <div className="Home container-top">
       <div className="heroImg">
@@ -96,19 +69,20 @@ export default function Home(props: any) {
       <div className="slideContainer">
         <h1>TOP FRUITS</h1>
         <Slider
-          products={getTopThreeItemsFromSpecificType("fruits", props.products)}
+          products={getTopThreeItemsFromSpecificType("fruits", props.products,3)}
         />
 
         <h1>TOP LAPTOPS</h1>
         <Slider
-          products={getTopThreeItemsFromSpecificType("laptops", props.products)}
+          products={getTopThreeItemsFromSpecificType("laptops", props.products,3)}
         />
 
         <h1>TOP VEGETABLES</h1>
         <Slider
           products={getTopThreeItemsFromSpecificType(
             "vegetables",
-            props.products
+            props.products,
+            3
           )}
         />
       </div>
